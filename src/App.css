@@ -1,3 +1,7 @@
+:root{
+  --qColor: #3b7f7e;
+}
+
 .App {
   text-align: center;
 }
@@ -30,4 +34,102 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* ======================================= */
+/* ============== MY STYLE =============== */
+/* ======================================= */
+
+/* navbar landing page */
+.Navbar{
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  text-align: center;
+  
+}
+
+/* jumbotron landing page */
+.lp_jumbotron{
+  background-image: url(./supports/img/5.png);
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
+
+.jb_content_big{
+  font-size: 32px;
+  color: var(--qColor);
+  
+}
+
+.landingPage .row{
+  margin-top: 70px;
+}
+
+/* Utility */
+
+.kotak{
+  border: 1px dashed red;
+}
+.btnBgColor{
+ background-color: var(--qColor); 
+}
+
+.btnBgWhite{
+  background-color: #fff;
+  width: fit-content;
+  color: var(--qColor);
+  font-weight: bold;
+  padding: 0.5em 1.3em;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.btnBgWhite:hover{
+  background-color: var(--qColor);
+  color: white;
+
+}
+
+.vertCenter{
+  margin:auto;
+}
+.clear{
+ text-decoration: none !important;
+}
+
+
+/* ===== tablet to desktop mode ========= */
+@media(min-width: 768px){
+
+/* ===== LANDING PAGE NAV ===== */
+.Navbar{
+  background-color: transparent;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+}
+
+.landingPage .NavLink{
+  color: white;
+}
+
+.landingPage .NavLink:hover{
+  margin-bottom: 5px;
+}
+
+
+.landingPage .NavLink:hover::after{
+  content: '';
+  display: block;
+  border-bottom: 2px solid white;
+  width: 50%;
+  margin: auto;
+  text-decoration-style: none !important;
+  padding-bottom: 5px;
+  margin-bottom: -6px;
+  
+}
 }
