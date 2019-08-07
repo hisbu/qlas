@@ -1,39 +1,11 @@
 :root{
-  --qColor: #3b7f7e;
+  /* --qColor: #3b7f7e; */
+  --qColor: #F78A2F;
+  --qColorSecondry: #1A2351;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html{
+  scroll-behavior: smooth;
 }
 
 /* ======================================= */
@@ -52,21 +24,30 @@
 
 /* jumbotron landing page */
 .lp_jumbotron{
-  background-image: url(./supports/img/5.png);
+  background-image: url(./supports/img/2.png);
   background-size: cover;
   background-position: center center;
   height: 100vh;
-}
-
-.jb_content_big{
-  font-size: 32px;
-  color: var(--qColor);
   
 }
 
-.landingPage .row{
-  margin-top: 70px;
+.jb_content{
+  margin-top: 20%;
 }
+
+.jb_content_big{
+  font-size: 2em;
+  color: var(--qColorSecondry); 
+  font-weight: 500;
+  text-shadow: 1px 1px 0px #fff;
+}
+
+.jb_content_small{
+  font-size: 1em;
+  color: var(--qColorSecondry);
+  margin-top: 1em;
+}
+
 
 /* Utility */
 
@@ -85,6 +66,7 @@
   padding: 0.5em 1.3em;
   border-radius: 100px;
   cursor: pointer;
+  transition: 0.5s;
 }
 
 .btnBgWhite:hover{
@@ -93,12 +75,162 @@
 
 }
 
+.btnBgQcolor{
+  background-color: var(--qColor);
+  width: fit-content;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5em 1.3em;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnBgQcolor:hover{
+  background-color: #fff;
+  border: 1px solid var(--qColor);
+  color: var(--qColor);
+
+}
+
+.jb_btn{
+  width: fit-content;
+  margin-top: 3em;
+}
+
 .vertCenter{
   margin:auto;
 }
 .clear{
  text-decoration: none !important;
 }
+
+.imgCarousel{
+  height: 300px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-left: 30px !important;
+}
+
+/* Feature */
+#sec_feature{
+  background-image: url(../src/supports/img/iStock.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.overlay_feature{
+  background-color: #000;
+  opacity: .8;
+  overflow: hidden;
+  height: max-content;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.mtop{
+  margin: 5em 0em;
+}
+
+.feature_content{
+ width: 100%;
+ background-color: #000;
+ border: 2px solid #fff;
+ opacity: .8;
+ border-radius: 12px;
+ z-index: 10;
+ padding: 10px;
+ color: #fff;
+}
+
+.feature_content:hover{
+  background-color: #fff;
+  transition: 0.8s;
+  color: #000;
+  
+}
+
+.feature_content img{
+  margin: 10px;
+  z-index: 1000;
+}
+
+#feature_content h3{
+  margin-top:10px;
+  color: #fff;
+}
+
+#feature_content p{
+  margin-top: 10px;
+  color: #fff;
+}
+
+.feature_icon{
+  font-size: 56px;
+  color: #000;
+}
+
+
+/* =================Catalogue=============== */
+.catalogue{
+  padding: 10px;
+}
+
+
+
+
+/* ============ arrow ============= */
+/* .arrow_container{
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+}
+.arrow{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.arrow span{
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-bottom: 5px solid #06A8FF;
+  border-right: 5px solid #06A8FF;
+  transform: rotate(45deg);
+  margin: -10px;
+  animation: animate 2s infinite;
+}
+.arrow span:nth-child(2){
+  animation-delay: -0.2s;
+}
+.arrow span:nth-child(3){
+  animation-delay: -0.4s;
+}
+@keyframes animate {
+  0%{
+      opacity: 0;
+      transform: rotate(45deg) translate(-20px,-20px);
+  }
+  50%{
+      opacity: 1;
+  }
+  100%{
+      opacity: 0;
+      transform: rotate(45deg) translate(20px,20px);
+  }
+} */
+
+
+
+
+
+
 
 
 /* ===== tablet to desktop mode ========= */
@@ -110,26 +242,44 @@
   position: absolute;
   z-index: 1000;
   width: 100%;
+  
 }
 
 .landingPage .NavLink{
   color: white;
+  transition: 1s;
 }
 
-.landingPage .NavLink:hover{
+/* .landingPage .NavLink:hover{
   margin-bottom: 5px;
-}
+} */
 
 
 .landingPage .NavLink:hover::after{
   content: '';
   display: block;
   border-bottom: 2px solid white;
+  transition: 2s;
   width: 50%;
   margin: auto;
   text-decoration-style: none !important;
   padding-bottom: 5px;
-  margin-bottom: -6px;
+  margin-bottom: -7px;
   
 }
+
+/* Utility */
+.btnBgColor{
+  max-width: 15em;
 }
+
+}
+
+
+
+
+/* .slick-slide {
+  height: 320px;
+  border: 4px solid #F25634;
+  box-sizing: border-box;
+} */

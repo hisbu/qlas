@@ -6,13 +6,9 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink,} from 'reactstrap';
 
-  import Logo from './../supports/img/logo2.png'
+  import Logo from './../supports/img/logo3.png'
   import { Link } from 'react-router-dom'
   import {BtnBgWhite} from './../component/btnQlas'
 
@@ -36,7 +32,7 @@ export default class Example extends React.Component {
         <Navbar light expand="md" className='Navbar'>
             <div className="container">
             <NavbarBrand href="/">
-                <img src={Logo} height='30px' />
+                <img src={Logo} height='30px' alt='qlas logo' />
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -52,7 +48,7 @@ export default class Example extends React.Component {
                       </Link>
                   </NavItem>
                   <NavItem>
-                    <Link className='clear'>
+                    <Link to='/dashboard' className='clear'>
                       <NavLink>
                         <BtnBgWhite title={'Masuk'}/>
                       </NavLink>

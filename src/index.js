@@ -1,12 +1,21 @@
+//service component
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'typeface-raleway'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter} from 'react-router-dom'
+
+// styling component
+import './index.css';
+import './App.css'
+import './App.scss'
+import './supports/flaticon/flaticon.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'typeface-raleway'
+// import "slick-carousel/slick/slick.css"; 
+// import "slick-carousel/slick/slick-theme.css";
+
+
 
 ReactDOM.render(
             <BrowserRouter>

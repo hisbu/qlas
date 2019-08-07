@@ -7,7 +7,15 @@ class BtnBgWhite extends Component{
     }
 }
 
+class BtnBgQcolor extends Component{
+    render(){
+        return <div className='btnBgQcolor'>{this.props.title}</div>
+
+    }
+}
+
 export {
-    BtnBgWhite
+    BtnBgWhite,
+    BtnBgQcolor
 }
 
