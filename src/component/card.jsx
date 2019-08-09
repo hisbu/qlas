@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ImgSample from './../supports/img/carousel/img4.jpg'
-// import { BookmarkBorderOutlined} from '@material-ui/icons'
+import { BookmarkBorderOutlined} from '@material-ui/icons'
 
 const useStyles = makeStyles({
   card: {
@@ -40,12 +40,12 @@ export default function MediaCard() {
           </Typography> */}
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          {/* <Icon>BookmarkBorderOutlined</Icon> */}
-        </Button>
+      <CardActions className='d-flex justify-content-between'>
         <Button size="small" color="primary">
           Learn More
+        </Button>
+        <Button size="small" color="primary">
+          <BookmarkBorderOutlined/>
         </Button>
       </CardActions>
     </Card>
