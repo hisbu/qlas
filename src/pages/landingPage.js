@@ -7,6 +7,7 @@ import CardCatalogue from './../component/card'
 import Listening from './../../src/supports/img/internet.png'
 import Exam from './../../src/supports/img/trophy.png'
 import Question from './../../src/supports/img/job-search.png'
+import Catalog from '../supports/img/programmer.png'
 // import Testimoni from './../supports/img/testimonyhome.jpg'
 class LandingPage extends Component{
     render(){
@@ -106,30 +107,26 @@ class LandingPage extends Component{
                             </div>
                         </div>
                         <div className='row '>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
+                            <div className='col-4 d-flex vertCenter img-fluid catalogue_img'>
+                                <img src={Catalog} alt='catalog' width='300px'/>
                             </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
+                            <div className='col-md-8 col-sm-12 '>
+                                <div className='row d-flex justify-content-between'>
+                                    <div className='col-md-6 mt-4 '>
+                                        <CardCatalogue/>
+                                    </div>
+                                    <div className='col-md-6 mt-4 '>
+                                        <CardCatalogue/>
+                                    </div>
+                                    <div className='col-md-6 mt-4'>
+                                        <CardCatalogue/>
+                                    </div>
+                                    <div className='col-md-6 mt-4'>
+                                        <CardCatalogue/>
+                                    </div>
+                                </div>
                             </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
-                            </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
-                            </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
-                            </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
-                            </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
-                            </div>
-                            <div className='col-md-3 mt-4'>
-                                <CardCatalogue/>
-                            </div>
+                            
                         </div>
                         <center className='mbottom mt-5'><BtnBgQcolor title={'Lihat kelas lengkap'}/></center>
                     </div>
@@ -180,7 +177,7 @@ class LandingPage extends Component{
                                 </div>
                                 <div className='col-3'>Sosmed</div>
                             </div>
-                            <center><span>@2019 PT Indonesia Pintar Bersama. All Rights Reserver.</span></center>
+                            <center><div className='mt-5'>@2019 PT Indonesia Pintar Bersama. All Rights Reserver.</div></center>
                         </div>
                     </div>
                 </section>
