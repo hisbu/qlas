@@ -10,6 +10,9 @@ import Question from './../../src/supports/img/job-search.png'
 import Catalog from '../supports/img/programmer.png'
 // import Testimoni from './../supports/img/testimonyhome.jpg'
 class LandingPage extends Component{
+    state={
+        pageLocation: 'landing'
+    }
     render(){
         return(
             <div className='landingPage'>

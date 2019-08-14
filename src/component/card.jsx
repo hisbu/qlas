@@ -1,4 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
+
+// style
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -42,7 +45,9 @@ export default function MediaCard() {
       </CardActionArea>
       <CardActions className='d-flex justify-content-between'>
         <Button size="small" color="primary">
-          Learn More
+          <Link to='/detail'>
+            Learn More
+          </Link>
         </Button>
         <Button size="small" color="primary">
           <BookmarkBorderOutlined/>
