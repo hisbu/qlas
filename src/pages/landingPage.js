@@ -16,7 +16,7 @@ class LandingPage extends Component{
     render(){
         return(
             <div className='landingPage'>
-                <NavBar/>
+                {/* <NavBar/> */}
                 {/* ============= Start Jumbotron =============  */}
                 <section className='lp_jumbotron d-flex '>
                     <div className='container '>

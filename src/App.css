@@ -56,6 +56,7 @@ html{
 .kotak{
   border: 1px dashed red;
 }
+
 .btnBgColor{
  background-color: var(--qColor); 
 }
@@ -256,6 +257,7 @@ html{
 
 
 
+
 /* ===== tablet to desktop mode ========= */
 @media(min-width: 768px){
 
@@ -263,13 +265,16 @@ html{
 .Navbar{
   background-color: transparent;
   position: absolute;
-  z-index: 1000;
+  /* z-index: 1000; */
   width: 100%;
-  
+}
+
+.Navbar#detailPage{
+  background-color: #fff;
 }
 
 .landingPage .NavLink{
-  color: white;
+  color: #FFF;
   transition: 1s;
 }
 
@@ -279,6 +284,41 @@ html{
 
 
 .landingPage .NavLink:hover::after{
+  content: '';
+  display: block;
+  border-bottom: 2px solid white;
+  transition: 2s;
+  width: 50%;
+  margin: auto;
+  text-decoration-style: none !important;
+  padding-bottom: 5px;
+  margin-bottom: -7px;
+  
+}
+
+/* ===== DETAIL PAGE NAV ===== */
+.Navbar2{
+  background-color: var(--qColor);
+  position: relative;
+  /* z-index: 1000; */
+  width: 100%;
+}
+
+.Navbar#detailPage{
+  background-color: #fff;
+}
+
+.detailPage .NavLink{
+  color: #FFF;
+  transition: 1s;
+}
+
+/* .landingPage .NavLink:hover{
+  margin-bottom: 5px;
+} */
+
+
+.detailPage .NavLink:hover::after{
   content: '';
   display: block;
   border-bottom: 2px solid white;

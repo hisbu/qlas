@@ -19,10 +19,10 @@ import 'typeface-raleway'
 // import "slick-carousel/slick/slick.css"; 
 // import "slick-carousel/slick/slick-theme.css";
 
-// const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+const store = createStore(reducers)
 
 ReactDOM.render(
-    // <Provider store={store}>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>,
