@@ -1,0 +1,51 @@
+/* DASHBOARD USER STYLE */
+
+:root{
+    /* --qColor: #3b7f7e; */
+    --qColor: #F78A2F;
+    --qColorSecondry: #1A2351;
+  }
+
+*{
+    margin: 0;
+    padding: 0;
+}
+  .dashboardUser{
+    display: flex;
+    /* height: 100vh; */
+    background-color: var(--qColor);
+    padding: 0.5em;
+    
+}
+
+.sideMenu{
+    flex:1;
+    background-color: var(--qColor);
+    border-radius: 16px;
+    align-items: center;
+}
+
+.logo{
+    text-align   : center;
+}
+
+
+.contentContainer{
+    flex:4;
+    /* margin: 0.5em 0.5em 0.5em 0; */
+    background-color: #fff;
+    border-radius: 18px;
+    /* height: 97vh; */
+    padding: 2em;
+}
+
+.header{
+    /* width: 100wh; */
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+
+.right-menu{
+
+}
+

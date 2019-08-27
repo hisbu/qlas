@@ -11,7 +11,6 @@ import desktop from './../../supports/img/desktop.png'
 class DetailQelas extends Component{
     constructor(props) {
         super(props);
-    
         this.toggle = this.toggle.bind(this);
         this.state = {
           activeTab: '1'

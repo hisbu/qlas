@@ -22,6 +22,14 @@ html{
   
 }
 
+.boks{
+  width: 70px;
+  height: 70px;
+  margin:5px;
+  border: 1px dashed blue;
+  
+}
+
 /* jumbotron landing page */
 .lp_jumbotron{
   background-image: url(./supports/img/2.png);
