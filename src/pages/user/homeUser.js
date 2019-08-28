@@ -1,16 +1,20 @@
 import React, {Component} from 'react'
-import Logo from '../../supports/img/logo1.png'
-import TopMenu from '../../component/topMenu'
+import { Paper } from '@material-ui/core'
 import Carousel from './../../component/carouselUserDashboard'
+import TableProgress from './tableProgress'
 
 class HomeUser extends Component{
     render(){
         return(
-            <div className='container kotak'>
+            <div className='container'>
                   <div className='row'>
+                    {/* ============ START MAIN CONTAINER ============ */}
                     <div className='col-9'>
                       <Carousel/>
+                        <TableProgress/>
                     </div>
+
+                   {/* ============ START RIGHT CONTAINER ============ */}
 
                     <div className='col-3 rightContent'>
                         <h6>Rekomendasi Kelas</h6>
