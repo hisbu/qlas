@@ -59,3 +59,13 @@
     font-weight: bold;
 }
 
+.sideMenuItem{
+    margin-top: 5em;
+    margin-left: 1em;
+    color: white;
+}
+
+.sideMenuItem span{
+    display: block;
+    color: white;
+}

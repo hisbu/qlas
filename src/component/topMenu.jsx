@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link, Redirect} from 'react-router-dom'
 import { makeStyles, Avatar, Badge } from '@material-ui/core'
 import { MailOutlineRounded, NotificationsNone } from '@material-ui/icons'
 import {
@@ -16,7 +17,7 @@ import {
 import qian from '../supports/img/qian.jpg'
 import Logo from './../supports/img/logo3.png'
 import Logo2 from './../supports/img/logo1.png'
-import { Link } from 'react-router-dom'
+
 
 const useStyle = makeStyles({
     bigAvatar:{
@@ -89,7 +90,9 @@ class TopMenu extends Component{
                                 </DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem>
-                                    Reset
+                                    {/* <Redirect to='/'> */}
+                                        Logout
+                                    {/* </Redirect> */}
                                 </DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

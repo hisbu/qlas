@@ -20,14 +20,15 @@ class DashboardUser extends Component{
         <div className='dashboardUser'>
          
             <div className='sideMenu '>
-              <div className='logo mt-4'>
-                {/* <img src={Logo} height='40px' alt='qlas logo' /> */}
+              <div className='sideMenuItem'>
+                <Link to='/dashboard'><span>Home</span></Link>
+                <Link to='/dashboard/test'><span>ke test page</span></Link>
               </div>
             </div>
             <div className='contentContainer '>
               <div className='contentSection '>
                 
-                <Link to='/dashboard/test'>ke test page</Link>
+               
               
                 <Route path='/dashboard/test' component={TestPage}/>
               
