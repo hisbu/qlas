@@ -6,6 +6,9 @@ import './style.css'
 import Logo from '../../supports/img/logo1.png'
 import TopMenu from '../../component/topMenu'
 import TestPage from './../../pages/test'
+import Carousel from './../../component/carouselUserDashboard'
+import HomeUser from './homeUser'
+
 class DashboardUser extends Component{
 
   componentDidMount(){
@@ -18,25 +21,22 @@ class DashboardUser extends Component{
     return(
       <div style={{backgroundColor:'#fff'}}>
         <div className='dashboardUser'>
-         
-            <div className='sideMenu '>
+          <div className='row'>
+            {/* ============ START SIDE MENU ============ */}
+            <div className='sideMenu  col-2 '>
               <div className='sideMenuItem'>
                 <Link to='/dashboard'><span>Home</span></Link>
                 <Link to='/dashboard/test'><span>ke test page</span></Link>
               </div>
             </div>
-            <div className='contentContainer '>
+             {/* ============ START CONTENT CONTAINER ============ */}
+            <div className='contentContainer col-10 '>
               <div className='contentSection '>
-                
-               
-              
-                <Route path='/dashboard/test' component={TestPage}/>
-              
-               
-              </div>
+                  <Route path='/dashboard' component={HomeUser} exact/>
+                  <Route path='/dashboard/test' component={TestPage}/>
+              </div>  
             </div>
-
-         
+          </div>
         </div>
       </div>
     )

@@ -11,7 +11,7 @@
     padding: 0;
 }
   .dashboardUser{
-    display: flex;
+    /* display: flex; */
     /* height: 100vh; */
     background-color: var(--qColor);
     padding: 0.5em;
@@ -19,7 +19,7 @@
 }
 
 .sideMenu{
-    flex:1;
+    /* flex:1; */
     background-color: var(--qColor);
     border-radius: 16px;
     align-items: center;
@@ -31,9 +31,9 @@
 
 
 .contentContainer{
-    flex:4;
+    /* flex:4; */
     /* margin-top: 2em; */
-    /* margin: 0.5em 0.5em 0.5em 0; */
+    /* margin: 0; */
     background-color: #fff;
     border-radius: 18px;
     min-height: 65vh;
@@ -48,6 +48,7 @@
     position: absolute;
     width: 100%;
     top: 0.5em;
+    z-index: 100;
 }
 
 .menuItem{
@@ -68,4 +69,54 @@
 .sideMenuItem span{
     display: block;
     color: white;
+}
+
+.rightContent{
+    border-radius: 16px;
+    background-color: #f5f5f5;
+    padding: 1em;
+}
+
+.rightContent h6{
+    color: var(--qColorSecondry);
+    font-weight: bold;
+    margin-bottom: 2em;
+}
+
+.rekomendasiContainer{
+    border-radius: 16px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 1em;
+}
+
+.rekomendasiImage{
+    border-radius: 16px 16px 0 0 ;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+.rekomendasiImage img{
+    width: 100%;
+}
+
+.recomendasiDetail{
+    width: 100%;
+    border-radius: 16px;
+    background-color: #fff;
+    padding: 1em;
+    position: relative;
+    margin-top: -30px;
+}
+
+.rekomendasiTitle{
+    color: var(--qColorSecondry);
+    font-weight: bold;
+    /* font-style: italic; */
+    font-size: 1.1em;
+}
+
+.rekomendasiContent{
+    font-size: 0.8em
 }
