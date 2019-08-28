@@ -13,6 +13,7 @@ import {
   import { Link } from 'react-router-dom'
   import {BtnBgWhite} from './../component/btnQlas'
   import { connect } from 'react-redux'
+  import TopMenu from './topMenu'
 
 class Example extends React.Component {
   constructor(props) {
@@ -68,6 +69,42 @@ class Example extends React.Component {
           </div>
         );
     }
+    if(this.props.position==='dashboard'){
+      return (
+        <TopMenu/>
+        // <div className='Navbar landingPage'>
+        //   <Navbar light expand="md" className='Navbar'>
+        //       <div className="container">
+        //       <NavbarBrand href="/">
+        //           <img src={Logo} height='30px' alt='qlas logo' />
+        //       </NavbarBrand>
+        //       <NavbarToggler onClick={this.toggle} />
+        //       <Collapse isOpen={this.state.isOpen} navbar>
+        //           <Nav className="ml-auto" navbar>
+        //             <NavItem className='vertCenter'>
+        //               <Link className='clear'>
+        //                 <NavLink><span className='NavLink '>Academy</span></NavLink>
+        //                 </Link>
+        //             </NavItem>
+        //             <NavItem className='vertCenter'>
+        //               <Link className='clear'>
+        //                 <NavLink><span className='NavLink '>Tentang Kami</span></NavLink>
+        //                 </Link>
+        //             </NavItem>
+        //             <NavItem>
+        //               <Link to='/dashboard' className='clear'>
+        //                 <NavLink>
+        //                   <BtnBgWhite title={`Masuk`}/>
+        //                 </NavLink>
+        //               </Link>
+        //             </NavItem>
+        //           </Nav>
+        //       </Collapse>
+        //       </div>
+        //   </Navbar>
+        // </div>
+      );
+  }
     return (
       <div className='Navbar2 detailPage'>
         <Navbar light expand="md" className='Navbar'>

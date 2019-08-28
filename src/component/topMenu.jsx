@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { makeStyles, Avatar } from '@material-ui/core'
+import { makeStyles, Avatar, Badge } from '@material-ui/core'
+import { MailOutlineRounded, NotificationsNone } from '@material-ui/icons'
 import {
     Collapse,
     Navbar,
@@ -25,6 +26,12 @@ const useStyle = makeStyles({
     }
 })
 
+const style2 = makeStyles(theme=>({
+    margin:{
+        margin: theme.spacing(2)
+    }
+}))
+
 class TopMenu extends Component{
     constructor(props) {
         super(props);
@@ -40,22 +47,35 @@ class TopMenu extends Component{
         });
       }
     render(){
-        const {avatar, bigAvatar} = useStyle
-
+        const {bigAvatar} = useStyle
+        const { margin } = style2
         return(
             <div>  
-                <div className='header kotak '>
+                <div className='topmenu   '>
                     <Navbar color="" light expand="md" >
-                        {/* <NavbarBrand href="/">reactstrap</NavbarBrand> */}
+                        <NavbarBrand href="/">
+                            <img src={Logo2} height='30px' alt='qlas logo' />
+                        </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                            {/* <NavItem>
-                                <NavLink href="/components/">Components</NavLink>
+                            <NavItem className=' menuItem '>
+                                <NavLink href="/components/">
+                                    <Badge className={margin} color='primari' variant='dot'>
+                                        <NotificationsNone/>
+                                    </Badge>
+                                </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-                            </NavItem> */}
+                            <NavItem className=' menuItem '>
+                                <NavLink href="/components/">
+                                    <Badge className={margin} color='primari' variant='dot'>
+                                        <MailOutlineRounded/>
+                                    </Badge>
+                                </NavLink>
+                            </NavItem>
+                            <NavItem className=' menuItem '>
+                                <NavLink href="" className=''><span className=' '>Qiandra Alea </span></NavLink>
+                            </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav >
                                     <Avatar alt='hisbu' src={qian} style={bigAvatar}/>

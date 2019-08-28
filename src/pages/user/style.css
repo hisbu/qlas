@@ -32,20 +32,30 @@
 
 .contentContainer{
     flex:4;
+    /* margin-top: 2em; */
     /* margin: 0.5em 0.5em 0.5em 0; */
     background-color: #fff;
     border-radius: 18px;
-    /* height: 97vh; */
+    min-height: 65vh;
     padding: 2em;
 }
 
-.header{
-    /* width: 100wh; */
-    /* display: flex; */
-    /* justify-content: space-between; */
+.contentSection{
+    margin-top: 3em;
 }
 
-.right-menu{
+.topmenu{
+    position: absolute;
+    width: 100%;
+    top: 0.5em;
+}
 
+.menuItem{
+    align-self: center;
+}
+
+.menuItem span{
+    color: var(--qColorSecondry);
+    font-weight: bold;
 }
 

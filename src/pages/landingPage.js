@@ -8,6 +8,7 @@ import Listening from './../../src/supports/img/internet.png'
 import Exam from './../../src/supports/img/trophy.png'
 import Question from './../../src/supports/img/job-search.png'
 import Catalog from '../supports/img/programmer.png'
+
 // import Testimoni from './../supports/img/testimonyhome.jpg'
 class LandingPage extends Component{
     state={
@@ -159,7 +160,7 @@ class LandingPage extends Component{
                 </section>
                 
                 {/*  ============= Start Footer ============= */}
-                <section id='sec_footer'>
+                {/* <section id='sec_footer'>
                     <div className='footer_bg '>
                         <div className='container'>
                             <div className='row'>
@@ -183,7 +184,7 @@ class LandingPage extends Component{
                             <center><div className='mt-5'>@2019 PT Indonesia Pintar Bersama. All Rights Reserver.</div></center>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
             </div>
         )

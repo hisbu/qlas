@@ -5,7 +5,14 @@ class test extends Component{
     return(
       <div className='container bg-secondary'>
         <div className='col-10'>
-        <Carousel/>
+        <h1>test page</h1>
+        <div className='boks'></div>
+               <div className='boks'></div>
+               <div className='boks'></div>
+               <div className='boks'></div>
+               <div className='boks'></div>
+               <div className='boks'></div>
+               <div className='boks'></div>
         </div>
       </div>
     )
