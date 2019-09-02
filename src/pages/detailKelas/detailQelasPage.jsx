@@ -7,6 +7,7 @@ import classnames from 'classnames'
 import './style.css'
 import image4 from './../../supports/img/carousel/img4.jpg'
 import desktop from './../../supports/img/desktop.png'
+import MateriPage from '../materi/materiPage'
 
 class DetailQelas extends Component{
     constructor(props) {
@@ -27,7 +28,7 @@ class DetailQelas extends Component{
         var position = window.location.href.split('/')[3]
         this.props.pagePosition(position)
         console.log(position)
-      }
+    }
     render(){
         return(
             <div id='detailPage' className=' detailPage'>
@@ -126,7 +127,7 @@ Serta 3 tugas berbasis proyek yang akan menantang Anda untuk membangun PWA Anda 
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
-                                <Row>
+                                {/* <Row>
                                 <Col sm="6">
                                     <Card body>
                                     <CardTitle>Special Title Treatment</CardTitle>
@@ -141,7 +142,8 @@ Serta 3 tugas berbasis proyek yang akan menantang Anda untuk membangun PWA Anda 
                                     <Button>Go somewhere</Button>
                                     </Card>
                                 </Col>
-                                </Row>
+                                </Row> */}
+                                <MateriPage/>
                             </TabPane>
                             </TabContent>
                         </div>

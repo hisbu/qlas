@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { makeStyles, Avatar, Badge } from '@material-ui/core'
 import { MailOutlineRounded, NotificationsNone } from '@material-ui/icons'
+import { connect } from 'react-redux'
 import {
     Collapse,
     Navbar,
@@ -17,6 +18,7 @@ import {
 import qian from '../supports/img/qian.jpg'
 import Logo from './../supports/img/logo3.png'
 import Logo2 from './../supports/img/logo1.png'
+import { onUserLogout } from './../redux/actions'
 
 
 const useStyle = makeStyles({
@@ -47,6 +49,11 @@ class TopMenu extends Component{
           isOpen: !this.state.isOpen
         });
       }
+
+      onBtnLogOutClick = () =>{
+        this.props.onUserLogout()
+      }
+
     render(){
         const {bigAvatar} = useStyle
         const { margin } = style2
@@ -75,7 +82,7 @@ class TopMenu extends Component{
                                 </NavLink>
                             </NavItem>
                             <NavItem className=' menuItem '>
-                                <NavLink href="" className=''><span className=' '>Qiandra Alea </span></NavLink>
+                                <NavLink href="" className=''><span className=' '>{this.props.username} </span></NavLink>
                             </NavItem>
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav >
@@ -89,7 +96,7 @@ class TopMenu extends Component{
                                     Option 2
                                 </DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem>
+                                <DropdownItem onClick={this.onBtnLogOutClick}>
                                     {/* <Redirect to='/'> */}
                                         Logout
                                     {/* </Redirect> */}
@@ -105,4 +112,9 @@ class TopMenu extends Component{
     }
 }
 
-export default TopMenu;
+const mapStateToProps = (state) => {
+    return{
+        username    : state.auth.username
+    }
+}
+export default connect(mapStateToProps, {onUserLogout}) (TopMenu);

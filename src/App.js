@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom'
-
+import { connect } from 'react-redux'
 // page
 import LandingPage from './pages/landingPage'
 import Landing from './pages/landing.js'
@@ -10,11 +10,16 @@ import TestPage from './pages/test'
 import DetailQelas from './pages/detailKelas/detailQelasPage'
 import NavBar from './component/navBar'
 import Footer from './component/footer'
+import Login from './pages/registerLogin/login'
+import { keepLogin } from './redux/actions'
+
 
 class App extends Component{
   componentDidMount(){
+    this.props.keepLogin()
     var id = window.location.href
     console.log(id)
+    console.log(this.props.username)
   }
   render(){
     // console.log(this.props.location)
@@ -26,6 +31,7 @@ class App extends Component{
           <Route path ='/dashboard' component = {DashboardUser}/>
           <Route path='/dashboard/test' component={TestPage}/>
           <Route path='/detail' component={DetailQelas}/>
+          <Route path='/login' component={Login}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>
@@ -34,4 +40,9 @@ class App extends Component{
   }
 }
 
-export default App;
+const mapStateToProps = ({auth}) =>{
+  return{
+    username    : auth.username
+  }
+}
+export default connect(mapStateToProps, {keepLogin}) (App);

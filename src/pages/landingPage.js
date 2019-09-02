@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import NavBar from '../component/navBar'
 import { BtnBgQcolor } from './../component/btnQlas'
 import CardCatalogue from './../component/card'
-
+import { connect } from 'react-redux'
+import { pagePosition } from '../redux/actions'
 // import image
 import Listening from './../../src/supports/img/internet.png'
 import Exam from './../../src/supports/img/trophy.png'
@@ -12,7 +13,13 @@ import Catalog from '../supports/img/programmer.png'
 // import Testimoni from './../supports/img/testimonyhome.jpg'
 class LandingPage extends Component{
     state={
-        pageLocation: 'landing'
+        location: 'landing'
+    }
+
+    componentDidMount(){
+        this.props.pagePosition(this.state.location)
+        console.log(this.props.pageLocation)
+        console.log(this.state.location)
     }
     render(){
         return(
@@ -191,4 +198,9 @@ class LandingPage extends Component{
     }
 }
 
-export default LandingPage;
+const mapStatetoProps = (state) => {
+    return {
+        pageLocation: state.page
+    }
+}
+export default connect(mapStatetoProps, {pagePosition}) (LandingPage); 

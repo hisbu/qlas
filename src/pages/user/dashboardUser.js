@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Redirect } from 'react-router-dom'
 import { connect} from 'react-redux'
 import { pagePosition} from './../../redux/actions'
 import './style.css'
@@ -18,34 +18,42 @@ class DashboardUser extends Component{
   }
 
   render(){
-    return(
-      <div style={{backgroundColor:'#fff'}}>
-        <div className='dashboardUser'>
-          <div className='row'>
-            {/* ============ START SIDE MENU ============ */}
-            <div className='sideMenu  col-2 '>
-              <div className='sideMenuItem'>
-                <Link to='/dashboard'><span>Home</span></Link>
-                <Link to='/dashboard/test'><span>ke test page</span></Link>
+    if(this.props.token !== ''){
+      return(
+        <div style={{backgroundColor:'#fff'}}>
+          <div className='dashboardUser'>
+            <div className='row'>
+              {/* ============ START SIDE MENU ============ */}
+              <div className='sideMenu  col-2 '>
+                <div className='sideMenuItem'>
+                  <Link to='/dashboard'><span>Home</span></Link>
+                  <Link to='/dashboard/test'><span>ke test page</span></Link>
+                </div>
               </div>
-            </div>
-             {/* ============ START CONTENT CONTAINER ============ */}
-            <div className='contentContainer col-10 '>
-              <div className='contentSection '>
-                  <Route path='/dashboard' component={HomeUser} exact/>
-                  <Route path='/dashboard/test' component={TestPage}/>
-              </div>  
+              {/* ============ START CONTENT CONTAINER ============ */}
+              <div className='contentContainer col-10 '>
+                <div className='contentSection '>
+                    <Route path='/dashboard' component={HomeUser} exact/>
+                    <Route path='/dashboard/test' component={TestPage}/>
+                </div>  
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
+    else if(this.props.authChecked && this.props.token === '') {
+        return <Redirect to="/login" />
+    }
+    return <center><h2>Loading.....</h2></center>
   }
 }
 
 const mapStateToProps = (state)=>{
   return {
-      position: state.page
+      position    : state.page,
+      token       : state.auth.token, 
+      authChecked : state.auth.authChecked
   }
 }
 
