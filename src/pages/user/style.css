@@ -126,3 +126,66 @@
     color: var(--qColorSecondry);
     font-size: 1.3em;
 }
+
+/* ============== PROFILE PAGE ============= */
+#profilePage{
+    background-color: #FFF;
+    padding: 1.5em;
+    min-height: 100vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.fontWhite{
+    color: #FFF;
+}
+
+.radiusatas{
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}
+
+.radiusbawah{
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+}
+
+.photoBox{
+    border-radius: 1em;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+.photoBox img{
+    height: 100%;
+}
+
+.detailProfile input{
+    /* display: inline-block; */
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding: 0.5em 1em 0.5em 1em;
+    border-style: none;
+    background-color: var(--qColorSecondry);
+    color: white;
+    margin-bottom: 0.5em;
+    /* float: right; */
+}
+
+.titleProfile{
+    /* position: relative; */
+    display: inline-block;
+    width: 150px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: var(--qColorSecondry);
+    color: white;
+    margin-right: 0.3em;;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 50%; */
+  }

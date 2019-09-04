@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect} from 'react-redux'
 import {pagePosition } from './../../redux/actions'
 import {Paper} from '@material-ui/core'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col} from 'reactstrap'
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap'
 import classnames from 'classnames'
 import './style.css'
 import image4 from './../../supports/img/carousel/img4.jpg'
@@ -33,11 +33,11 @@ class DetailQelas extends Component{
         return(
             <div id='detailPage' className=' detailPage'>
                 <div className='bg_detail'>
-                    <img src={image4}/>
+                    <img src={image4} alt='4a'/>
                 </div>`
                 <Paper className='paperDetail' >
                     <div className='kelas_pic'>
-                        <img src={desktop} width='15%'/>
+                        <img src={desktop} width='15%' alt='4b'/>
                         <p className='title_small'>Disusun Oleh : Ahmad Hisbullah</p>
                         <p className='title_kelas'>Membuat Singla Page Application dengan React</p>
                         <p className='title_small'>Level: Pemula    |    Platfrom: Website</p>

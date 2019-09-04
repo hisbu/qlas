@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, Input, Fab } from '@material-ui/core'
+import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, Fab } from '@material-ui/core'
 import { Navigation, Assignment, Print} from '@material-ui/icons'
 import { Progress } from 'reactstrap'
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 class TableProgress extends Component{
     render(){
-        const {margin, extendedIcon, marginButtom} = useStyles
+        const {margin, extendedIcon} = useStyles
         return(
             <div className='progressKelas'>
                 <Paper style={{padding:'1em', marginTop:'1em'}}>

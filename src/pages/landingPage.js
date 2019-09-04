@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import NavBar from '../component/navBar'
+// import NavBar from '../component/navBar'
 import { BtnBgQcolor } from './../component/btnQlas'
 import CardCatalogue from './../component/card'
 import { connect } from 'react-redux'

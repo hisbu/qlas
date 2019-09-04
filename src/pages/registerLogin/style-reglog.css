@@ -9,7 +9,7 @@
     /* justify-content: center; */
     /* align-items: center; */
     height: 100vh;
-    background-color: var(--qColor);
+    background-color: var(--qColorSecondry);
     font-family: 'Roboto', sans-serif;
   }
   
@@ -46,6 +46,24 @@
     margin-left: 3%;
     transition: right .8s ease-in-out;
   }
+
+  .frontboxkiri{
+    background-color: white;
+    border-radius: 20px;
+    height: 100%;
+    width: 50%;
+    z-index: 10;
+    position: relative;
+    left: 0;
+    margin-right: 3%;
+    margin-left: 3%;
+    transition: right .8s ease-in-out;
+  }
+  
+  .paddingInput{
+    padding: 0 1em 0 1em;
+  }
+  
   
   .moving{
     right:45%;
@@ -96,7 +114,7 @@
   
   .login h2,
   .signup h2 {
-    color: #35B729;
+    color: var(--qColor);
     font-size:22px;
   }
   
@@ -116,7 +134,7 @@
   
   .login button,
   .signup button{
-    background-color: #35B729;
+    background-color: var(--qColor);
     border: none;
     color:white;
     font-size: 12px;
@@ -125,9 +143,9 @@
     padding:10px;
     border-radius: 10px;
     width: 60px;
-    position: absolute;
-    right:30px;
-    bottom: 30px;
+    position: relative;
+    /* right:30px;
+    bottom: 30px; */
     cursor: pointer;
   }
   

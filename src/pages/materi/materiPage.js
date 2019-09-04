@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Paper, Input, Fab } from '@material-ui/core'
+import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow,  Fab } from '@material-ui/core'
 import './style.css'
 
 const useStyles = makeStyles(theme => ({
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }))
 class MateriPage extends Component{
     render(){
-        const {margin, extendedIcon, marginButtom} = useStyles
+        const {margin} = useStyles
         return(
             <div>
                 <div className='container mt-4'>

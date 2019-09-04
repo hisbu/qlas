@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { Paper, Input, Button } from '@material-ui/core'
+// import { Paper, Input, Button } from '@material-ui/core'
 import './style-reglog.css'
-import {BtnBgQcolor} from '../../component/btnQlas'
-import { Redirect } from 'react-router-dom'
+// import {BtnBgQcolor} from '../../component/btnQlas'
+import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { onUserLogin } from '../../redux/actions'
 
@@ -19,7 +19,7 @@ class LoginForm extends Component{
 
     renderError = () => {
         if(this.props.error.length > 0) {
-            return <p className="alert alert-danger">{this.props.error}</p>;
+            return <div className="alert alert-danger">{this.props.error}</div>;
         }
     }
 
@@ -47,7 +47,9 @@ class LoginForm extends Component{
                                 <div className="textcontent">
                                 <p className="title">Don't have an account?</p>
                                 <p>Sign up to save all your graph.</p>
-                                <button id="switch1">Sign Up</button>
+                                <Link to='/register'>
+                                    <button id="switch1">Sign Up</button>
+                                </Link>
                                 </div>
                             </div>
                             <div className="signupMsg visibility">
@@ -63,8 +65,8 @@ class LoginForm extends Component{
                         <div className="login">
                             <h2>LOG IN</h2>
                             <div className="inputbox">
-                            <input ref='email' type="text" name="email" placeholder="EMAIL" style={{paddingLeft:'1em'}} />
-                            <input ref='password' type="password" name="password" placeholder="PASSWORD" style={{paddingLeft:'1em'}}/>
+                            <input ref='email' type="text" name="email" placeholder="EMAIL" className='paddingInput' />
+                            <input ref='password' type="password" name="password" placeholder="PASSWORD" className='paddingInput'/>
                             </div>
                             <p>FORGET PASSWORD?</p>
                             {this.renderError()}

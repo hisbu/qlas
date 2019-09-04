@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Paper } from '@material-ui/core'
+// import { Paper } from '@material-ui/core'
 import Carousel from './../../component/carouselUserDashboard'
 import TableProgress from './tableProgress'
 
@@ -21,7 +21,7 @@ class HomeUser extends Component{
 
                         <div className='rekomendasiContainer'>
                           <div className='rekomendasiImage'>
-                            <img src={"https://www.xda-developers.com/files/2019/06/sale_18785_primary_image.jpg"}/>
+                            <img src={"https://www.xda-developers.com/files/2019/06/sale_18785_primary_image.jpg"} alt='primary'/>
                           </div>
                           <div className='recomendasiDetail'>
                               <p className='rekomendasiTitle'>
@@ -35,7 +35,7 @@ class HomeUser extends Component{
 
                         <div className='rekomendasiContainer'>
                           <div className='rekomendasiImage'>
-                            <img src={"https://www.xda-developers.com/files/2019/06/sale_18785_primary_image.jpg"}/>
+                            <img src={"https://www.xda-developers.com/files/2019/06/sale_18785_primary_image.jpg" }alt='scale_image'/>
                           </div>
                           <div className='recomendasiDetail'>
                               <p className='rekomendasiTitle'>

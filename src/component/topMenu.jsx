@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { makeStyles, Avatar, Badge } from '@material-ui/core'
 import { MailOutlineRounded, NotificationsNone } from '@material-ui/icons'
 import { connect } from 'react-redux'
@@ -16,7 +16,7 @@ import {
     DropdownMenu,
     DropdownItem} from 'reactstrap';
 import qian from '../supports/img/qian.jpg'
-import Logo from './../supports/img/logo3.png'
+// import Logo from './../supports/img/logo3.png'
 import Logo2 from './../supports/img/logo1.png'
 import { onUserLogout } from './../redux/actions'
 
@@ -66,6 +66,8 @@ class TopMenu extends Component{
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
+                            { this.props.token !== '' 
+                                ?
                             <Nav className="ml-auto" navbar>
                             <NavItem className=' menuItem '>
                                 <NavLink href="/components/">
@@ -84,26 +86,32 @@ class TopMenu extends Component{
                             <NavItem className=' menuItem '>
                                 <NavLink href="" className=''><span className=' '>{this.props.username} </span></NavLink>
                             </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav >
-                                    <Avatar alt='hisbu' src={qian} style={bigAvatar}/>
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                <DropdownItem>
-                                    Option 1
-                                </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem onClick={this.onBtnLogOutClick}>
-                                    {/* <Redirect to='/'> */}
-                                        Logout
-                                    {/* </Redirect> */}
-                                </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
+                            
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav >
+                                        <Avatar alt='hisbu' src={qian} style={bigAvatar}/>
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                    <Link to='/dashboard/profilePage'>
+                                        <DropdownItem>
+                                        Profile
+                                        </DropdownItem>                                    
+                                    </Link>
+                                    <DropdownItem>
+                                        Option 2
+                                    </DropdownItem>
+                                    <DropdownItem divider />
+                                    <DropdownItem onClick={this.onBtnLogOutClick}>
+                                        {/* <Redirect to='/'> */}
+                                            Logout
+                                        {/* </Redirect> */}
+                                    </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
                             </Nav>
+                                :
+                                null
+                            }
                         </Collapse>
                     </Navbar>
                 </div>
@@ -114,7 +122,8 @@ class TopMenu extends Component{
 
 const mapStateToProps = (state) => {
     return{
-        username    : state.auth.username
+        username    : state.auth.username,
+        token       : state.auth.token
     }
 }
 export default connect(mapStateToProps, {onUserLogout}) (TopMenu);

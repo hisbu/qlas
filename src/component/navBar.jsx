@@ -88,9 +88,11 @@ class Example extends React.Component {
                                Dashboard
                               </Link>
                             </DropdownItem>
-                            <DropdownItem>
-                                Option 2
-                            </DropdownItem>
+                            <Link to='/dashboard/profilePage'>
+                                        <DropdownItem>
+                                        Profile
+                                        </DropdownItem>                                    
+                                    </Link>
                             <DropdownItem divider />
                             <DropdownItem onClick={this.onBtnLogOutClick}>
                                 {/* <Redirect to='/'> */}

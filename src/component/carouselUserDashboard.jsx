@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css"
@@ -43,16 +43,16 @@ class ReactSlickDemo extends React.Component {
       <div className="carousel" style={{...style, width: '100%'}}>
         <Slider {...settings}>
           <div className='img-fluid'>
-            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/27/20723472/20723472_12a601b0-b2f5-40a2-887c-adcf0a8af96c.jpg"/>
+            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/27/20723472/20723472_12a601b0-b2f5-40a2-887c-adcf0a8af96c.jpg" alt='i1a'/>
           </div>
           <div>
-            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/27/20723472/20723472_a8416c02-ba84-4947-89ee-f9ef468a34ed.jpg" />
+            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/27/20723472/20723472_a8416c02-ba84-4947-89ee-f9ef468a34ed.jpg" alt='i1b'/>
           </div>
           <div>
-            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/27/20723472/20723472_cd6275b3-91c7-4c8b-b4e7-fdefc4f467df.jpg" />
+            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/27/20723472/20723472_cd6275b3-91c7-4c8b-b4e7-fdefc4f467df.jpg" alt='i1c'/>
           </div>
           <div>
-            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/23/20723472/20723472_35a2758c-ee48-456c-a3d9-5ec5a7fb3ebb.jpg" />
+            <img src="https://ecs7.tokopedia.net/img/cache/1242/banner/2019/8/23/20723472/20723472_35a2758c-ee48-456c-a3d9-5ec5a7fb3ebb.jpg" alt='i1d'/>
           </div>
         </Slider>
       </div>

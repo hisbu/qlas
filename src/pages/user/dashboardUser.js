@@ -3,11 +3,13 @@ import { Route, Link, Redirect } from 'react-router-dom'
 import { connect} from 'react-redux'
 import { pagePosition} from './../../redux/actions'
 import './style.css'
-import Logo from '../../supports/img/logo1.png'
-import TopMenu from '../../component/topMenu'
+// import Logo from '../../supports/img/logo1.png'
+// import TopMenu from '../../component/topMenu'
 import TestPage from './../../pages/test'
-import Carousel from './../../component/carouselUserDashboard'
+// import Carousel from './../../component/carouselUserDashboard'
 import HomeUser from './homeUser'
+import LoadingPage from './../loadingPage'
+import ProfilePage from './profile'
 
 class DashboardUser extends Component{
 
@@ -15,10 +17,11 @@ class DashboardUser extends Component{
     var position = window.location.href.split('/')[3]
     this.props.pagePosition(position)
     console.log(position)
+    console.log(this.props.authChecked)
   }
 
   render(){
-    if(this.props.token !== ''){
+    if(this.props.token !== '' && this.props.authChecked){
       return(
         <div style={{backgroundColor:'#fff'}}>
           <div className='dashboardUser'>
@@ -35,6 +38,7 @@ class DashboardUser extends Component{
                 <div className='contentSection '>
                     <Route path='/dashboard' component={HomeUser} exact/>
                     <Route path='/dashboard/test' component={TestPage}/>
+                    <Route path='/dashboard/profilePage' component={ProfilePage}/>
                 </div>  
               </div>
             </div>
@@ -42,10 +46,10 @@ class DashboardUser extends Component{
         </div>
       )
     }
-    else if(this.props.authChecked && this.props.token === '') {
-        return <Redirect to="/login" />
+    else if(!this.props.authChecked && this.props.token === '') {
+        return <Redirect to="/" />
     }
-    return <center><h2>Loading.....</h2></center>
+    return <LoadingPage/>
   }
 }
 

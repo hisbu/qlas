@@ -3,7 +3,7 @@ import {Route, Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
 // page
 import LandingPage from './pages/landingPage'
-import Landing from './pages/landing.js'
+// import Landing from './pages/landing.js'
 import DashboardUser from './pages/user/dashboardUser'
 import NotFound from './pages/notFound'
 import TestPage from './pages/test'
@@ -11,7 +11,12 @@ import DetailQelas from './pages/detailKelas/detailQelasPage'
 import NavBar from './component/navBar'
 import Footer from './component/footer'
 import Login from './pages/registerLogin/login'
+import Register from './pages/registerLogin/register'
 import { keepLogin } from './redux/actions'
+import LoadingPage from './pages/loadingPage'
+import Verified from './pages/registerLogin/verifikasi'
+import WaitingVerification from './pages/registerLogin/WaitingVerification'
+import Profile from './pages/user/profile'
 
 
 class App extends Component{
@@ -32,6 +37,11 @@ class App extends Component{
           <Route path='/dashboard/test' component={TestPage}/>
           <Route path='/detail' component={DetailQelas}/>
           <Route path='/login' component={Login}/>
+          <Route path='/register' component={Register}/>
+          <Route path='/verified' component={Verified}/>
+          <Route path='/waitingverification' component={WaitingVerification}/>
+          <Route path='/loading' component={LoadingPage}/>
+          <Route path='/profile' component={Profile}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>

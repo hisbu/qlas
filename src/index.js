@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Landing from './pages/landing'
+// import Landing from './pages/landing'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter} from 'react-router-dom'
 import { Provider } from 'react-redux'
