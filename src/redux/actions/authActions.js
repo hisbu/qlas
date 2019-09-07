@@ -3,7 +3,9 @@ import {
     USER_LOGIN_SUCCESS, 
     AUTH_SYSTEM_ERROR, 
     AUTH_LOADING,
-    USER_LOGOUT
+    USER_LOGOUT,
+    CHANGE_PASSWORD,
+    CHANGE_PASSWORD_SUCCESS
 } from './type';
 import { API_URL } from '../../helpers';
 
@@ -29,6 +31,29 @@ export const onUserRegister = ({ username, email, password }) => {
                 console.log(err);
                 dispatch({ type: AUTH_SYSTEM_ERROR, payload: 'System Error' })
             })        
+        }
+    }
+}
+
+export const changePassword = ({username, oldPassword, newPassword, confirm}) => {
+    console.log('======>', oldPassword, newPassword, confirm)
+    return (dispatch) => {
+        // dispatch({ type: AUTH_LOADING})
+        if(oldPassword === '' || newPassword === '' || confirm === ''){
+            dispatch({ type: CHANGE_PASSWORD, payload: 'Semua form harus diisi!'})
+        }else if(newPassword !== confirm){
+            dispatch({type: CHANGE_PASSWORD, payload: 'new password not match'})
+        }
+        else{
+            
+            axios.post(API_URL + '/user/changePassword', {username, oldPassword, newPassword, confirm})
+            .then((res)=>{
+                if(res.data.status === 'error') {
+                    dispatch({ type: CHANGE_PASSWORD, payload: res.data.message })
+                }else{
+                    dispatch({type : CHANGE_PASSWORD_SUCCESS, payload: 'New Password Updated'})
+                }
+            })
         }
     }
 }

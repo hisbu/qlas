@@ -48,6 +48,7 @@ class Example extends React.Component {
   componentDidMount(){
     console.log(this.props.position)
     console.log(this.props.username)
+    console.log('profile image ===========>',this.props.image)
   }
 
   onBtnLogOutClick = () =>{
@@ -135,13 +136,13 @@ class Example extends React.Component {
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem className='vertCenter'>
-                    <Link className='clear'>
-                      <NavLink><span className='NavLink '>Academy</span></NavLink>
+                    <Link to='/' className='clear'>
+                      <span className='NavLink '>Academy</span>
                       </Link>
                   </NavItem>
                   <NavItem className='vertCenter'>
-                    <Link className='clear'>
-                      <NavLink><span className='NavLink '>Tentang Kami</span></NavLink>
+                    <Link to='/' className='clear'>
+                      <span className='NavLink '>Tentang Kami</span>
                       </Link>
                   </NavItem>
                   {this.props.username !== ''
@@ -189,10 +190,11 @@ class Example extends React.Component {
   }
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
   return{
-    position  : state.page,
-    username      : state.auth.username
+    position    : state.page,
+    username    : state.auth.username,
+    image       : state.auth.image
   }
 }
 

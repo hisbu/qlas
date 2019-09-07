@@ -94,7 +94,7 @@ class LoginForm extends Component{
                 </div>
             )
         }
-        return <Redirect to='/dashboard'/>
+        return <Redirect to='/waitingverification'/>
     }
 }
 

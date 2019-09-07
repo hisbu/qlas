@@ -19,7 +19,7 @@ import qian from '../supports/img/qian.jpg'
 // import Logo from './../supports/img/logo3.png'
 import Logo2 from './../supports/img/logo1.png'
 import { onUserLogout } from './../redux/actions'
-
+import { API_URL } from '../helpers'
 
 const useStyle = makeStyles({
     bigAvatar:{
@@ -57,6 +57,7 @@ class TopMenu extends Component{
     render(){
         const {bigAvatar} = useStyle
         const { margin } = style2
+        console.log('nyari image ====>',this.props.image)
         return(
             <div>  
                 <div className='topmenu   '>
@@ -89,7 +90,7 @@ class TopMenu extends Component{
                             
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav >
-                                        <Avatar alt='hisbu' src={qian} style={bigAvatar}/>
+                                        <Avatar alt='hisbu' src={`${API_URL}${this.props.image}`} style={bigAvatar}/>
                                     </DropdownToggle>
                                     <DropdownMenu right>
                                     <Link to='/dashboard/profilePage'>
@@ -123,7 +124,8 @@ class TopMenu extends Component{
 const mapStateToProps = (state) => {
     return{
         username    : state.auth.username,
-        token       : state.auth.token
+        token       : state.auth.token,
+        image       : state.auth.image
     }
 }
 export default connect(mapStateToProps, {onUserLogout}) (TopMenu);
