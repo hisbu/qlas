@@ -1,0 +1,14 @@
+:root{
+    /* --qColor: #3b7f7e; */
+    --qColor: #F78A2F;
+    --qColorSecondry: #1A2351;
+  }
+
+  .manageKelas{
+      text-align: center;
+      min-height: 100vh;
+  }
+
+.mTop{
+    margin-top: 80px;
+}

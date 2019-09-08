@@ -1,0 +1,254 @@
+import React, {Component} from 'react'
+import './styleKelas.css'
+import { 
+        makeStyles,
+        Table, TableBody, TableCell, TableHead, TableRow, Input,
+        Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem
+        } from '@material-ui/core'
+import { CustomInput } from 'reactstrap'
+import Axios from 'axios'
+import { API_URL } from '../../helpers'
+import LoadingPage from '../loadingPage'
+import { Editor } from '@tinymce/tinymce-react'
+const numeral = require('numeral')
+
+const useStyles = makeStyles(theme => ({
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
+    },
+    dense: {
+      marginTop: 19,
+    },
+    menu: {
+      width: 200,
+    },
+  }));
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
+class ManageKelas extends Component{
+    state={
+        kelasData:'',
+        open: false,
+        category:'',
+        addImageFileName: 'Select Image Kelas...', 
+        addImageFile: undefined, 
+        description: ''
+    }
+
+    componentDidMount(){
+        const token = localStorage.getItem('token')
+        const headers = {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+            }
+        }
+        Axios.get(`${API_URL}/kelas/getKelas`, headers)
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({kelasData: res.data})
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    onAddImageFileChange = (e) => {
+        // console.log(document.getElementById('addImagePost').files[0])
+        // console.log(e.target.files[0])
+        if(e.target.files[0]) {
+            this.setState({ addImageFileName: e.target.files[0].name, addImageFile: e.target.files[0]})
+        }
+        else {
+            this.setState({ addImageFileName: 'Select Image Kelas....', addImageFile: undefined })
+        }
+    }
+
+    renderData = () =>{
+        console.log(this.state.kelasData)
+        var kelasData = this.state.kelasData
+        return kelasData.map((val, i)=>{
+            return(
+                <TableRow>
+                    <TableCell>{i+1}</TableCell>
+                    <TableCell>{val.kelasName}</TableCell>
+                    <TableCell>{val.category}</TableCell>
+                    <TableCell>{val.description}</TableCell>
+                    <TableCell>{val.kelasDuration} days</TableCell>
+                    <TableCell>Rp. {numeral(val.price).format('0,0')}</TableCell>
+                    <TableCell><img src={`${API_URL}${val.image}`} alt={val.kelasName} height='75px'/></TableCell>
+                    <TableCell><Input type='button' className='btn btn-primary' value='Edit'/></TableCell>
+                    <TableCell><Input type='button' className='btn btn-danger' value='Delete' onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/></TableCell>
+                </TableRow>
+            )
+        })
+    }
+
+    handleClickOpen = () =>{
+        this.setState({open: true})
+    }
+
+    handleClose = () =>{
+        this.setState({open: false})
+    }
+
+    handleEditorChange = (e) => {
+        console.log('Content was updated:', e.target.getContent());
+        this.setState({description: e.target.getContent()})
+      }
+
+    handleChange = name => event => {
+        console.log(event.target.value)
+        this.setState({category: event.target.value})
+    // setValues({ ...values, [name]: event.target.value });
+    };
+
+    onBtnSaveClick = () => {
+        var kelasName = this.name.value
+        var catId = this.state.category
+        var description = this.state.description
+        var kelasDuration = this.duration.value
+        var price = this.price.value
+        var image = this.onAddImageFileChange
+
+       
+        console.log(data)
+        
+        if(kelasName){
+            var formData = new FormData()
+            const token     = localStorage.getItem('token')
+            var headers = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            var data = {
+                kelasName,
+                catId,
+                description,
+                kelasDuration,
+                price
+            }
+
+            formData.append('image', this.state.addImageFile)
+            formData.append('data', JSON.stringify(data))
+
+            Axios.post(API_URL + '/kelas/addKelas', formData, headers)
+            .then((res)=>{
+                console.log(res.data)
+                this.setState({kelasData: res.data, open: false})
+            }).catch((err)=>{
+                console.log(err)
+            })
+
+        }else{
+            alert('name kelas harus diisi!')
+        }
+
+    }
+
+    onBtnDeleteKelasClick = (id) =>{
+        console.log('masuk delet'+ id)
+        const token = localStorage.getItem('token')
+        const headers = {
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+            }
+        }
+        Axios.delete(`${API_URL}/kelas/deleteKelas/${id}`, headers)
+        .then((res)=>{
+            this.setState({kelasData: res.data})
+        }).catch((err)=>[
+            console.log(err)
+        ])
+    }
+
+    render(){
+        const {textField, menu} = useStyles
+        if(this.state.kelasData.length === 0){
+            return <LoadingPage/>
+        }
+        return(
+            <div id='manageKelas' className='manageKelas kotak container'>
+                <div>
+                    <h1>manage kelas</h1>
+                </div>
+                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                    Add New Kelas
+                </Button>
+                <Dialog open={this.state.open} TransitionComponent={Transition} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Add New Kelas</DialogTitle>
+                    <DialogContent>
+                        <TextField autoFocus margin='dense' inputRef={el => this.name = el}  label="Kelas Name" type='text' fullWidth/>
+                        <TextField
+                            id="category"
+                            select
+                            label="Category"
+                            className={textField}
+                            value={this.state.category}
+                            onChange={this.handleChange()}
+                            SelectProps={{
+                                MenuProps: {
+                                    className: menu,
+                                },
+                            }}
+                            margin="normal"
+                            fullWidth
+                        >
+                            <MenuItem key='website' value='1'>Website</MenuItem>
+                            <MenuItem key='mobile' value='2'>Mobile</MenuItem>
+                            <MenuItem key='system' value='3'>System</MenuItem>
+                        </TextField>
+                        <Editor
+                            initialValue="<p>This is the initial content of the editor</p>"
+                            init={{
+                            plugins: 'link image code',
+                            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                            }}
+                            onChange={this.handleEditorChange}
+                        />
+                        <TextField inputRef={dur => this.duration = dur}  margin="dense" id="name"  label="Kelas Duration" type="text" fullWidth />
+                        <TextField inputRef={p => this.price = p}  margin="dense" id="name"  label="Price" type="text" fullWidth />
+                        <CustomInput type='file' id='kelasImage'  label={this.state.addImageFileName} onChange={this.onAddImageFileChange}/>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.onBtnSaveClick} color="primary">
+                        Save
+                    </Button>
+                    </DialogActions>
+                </Dialog>
+
+                {/* ============== TABLE DATA KELAS ============== */}
+                <div className='dataContainer row'>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>No</TableCell>
+                                <TableCell>Kelas Name</TableCell>
+                                <TableCell>Category</TableCell>
+                                <TableCell>Descriptioin</TableCell>
+                                <TableCell>Kelas Duration</TableCell>
+                                <TableCell>Price</TableCell>
+                                <TableCell>Image</TableCell>
+                                <TableCell colSpan='2'>Action</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.renderData()}
+                        </TableBody>
+                    </Table>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default ManageKelas;

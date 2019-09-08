@@ -17,6 +17,7 @@ import LoadingPage from './pages/loadingPage'
 import Verified from './pages/registerLogin/verifikasi'
 import WaitingVerification from './pages/registerLogin/WaitingVerification'
 import Profile from './pages/user/profile'
+import ManageKelas from './pages/kelasNmodule/manageKelas'
 
 
 class App extends Component{
@@ -42,6 +43,8 @@ class App extends Component{
           <Route path='/waitingverification' component={WaitingVerification}/>
           <Route path='/loading' component={LoadingPage}/>
           <Route path='/profile' component={Profile}/>
+
+          <Route path='/managekelas' component={ManageKelas}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>
