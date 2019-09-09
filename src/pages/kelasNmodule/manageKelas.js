@@ -33,11 +33,16 @@ const useStyles = makeStyles(theme => ({
 class ManageKelas extends Component{
     state={
         kelasData:'',
+        editData:'',
         open: false,
+        openEdit: false,
         category:'',
         addImageFileName: 'Select Image Kelas...', 
         addImageFile: undefined, 
-        description: ''
+        description: '',
+        selectedEditKelasId: 0,
+        editImageFileName: '',
+        editImageFile: undefined,
     }
 
     componentDidMount(){
@@ -67,23 +72,87 @@ class ManageKelas extends Component{
         }
     }
 
+    onEditImageFileChange = (e) => {
+        if(e.target.files[0]) {
+            this.setState({ editImageFileName: e.target.files[0].name, editImageFile: e.target.files[0]})
+        }
+        else {
+            this.setState({ editImageFileName: '', editImageFile: undefined })
+        }
+    }
+
+    componentDidUpdate(){
+        console.log(this.state.openEdit)
+        console.log(this.state.selectedEditKelasId)
+        console.log(this.state.editData)
+    }
+
     renderData = () =>{
         console.log(this.state.kelasData)
         var kelasData = this.state.kelasData
         return kelasData.map((val, i)=>{
-            return(
-                <TableRow>
-                    <TableCell>{i+1}</TableCell>
-                    <TableCell>{val.kelasName}</TableCell>
-                    <TableCell>{val.category}</TableCell>
-                    <TableCell>{val.description}</TableCell>
-                    <TableCell>{val.kelasDuration} days</TableCell>
-                    <TableCell>Rp. {numeral(val.price).format('0,0')}</TableCell>
-                    <TableCell><img src={`${API_URL}${val.image}`} alt={val.kelasName} height='75px'/></TableCell>
-                    <TableCell><Input type='button' className='btn btn-primary' value='Edit'/></TableCell>
-                    <TableCell><Input type='button' className='btn btn-danger' value='Delete' onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/></TableCell>
-                </TableRow>
-            )
+            if(val.idKelas !== this.selectedEditKelasId){
+                return(
+                    <TableRow>
+                        <TableCell>{i+1}</TableCell>
+                        <TableCell>{val.kelasName}</TableCell>
+                        <TableCell>{val.category}</TableCell>
+                        <TableCell>{val.description}</TableCell>
+                        <TableCell>{val.kelasDuration} days</TableCell>
+                        <TableCell>Rp. {numeral(val.price).format('0,0')}</TableCell>
+                        <TableCell><img src={`${API_URL}${val.image}`} alt={val.kelasName} height='75px'/></TableCell>
+                        <TableCell><Input type='button' className='btn btn-primary' value='Edit' onClick={()=> this.setState({selectedEditKelasId: val.idKelas, openEdit:true, editData: val})} /></TableCell>
+                        <TableCell><Input type='button' className='btn btn-danger' value='Delete' onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/></TableCell>
+                    </TableRow>
+                )
+            }
+            const {textField, menu} = useStyles
+            // return(
+                // <Dialog open={this.state.openEdit} TransitionComponent={Transition} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                //     <DialogTitle id="form-dialog-title">Edit Kelas</DialogTitle>
+                //     <DialogContent>
+                //         <TextField autoFocus margin='dense' inputRef={el => this.Ename = el} defaultValue={val.kelasName}  label="Kelas Name" type='text' fullWidth/>
+                //         <TextField
+                //             id="category"
+                //             select
+                //             label="Category"
+                //             className={textField}
+                //             value={this.state.category}
+                //             onChange={this.handleChange()}
+                //             SelectProps={{
+                //                 MenuProps: {
+                //                     className: menu,
+                //                 },
+                //             }}
+                //             margin="normal"
+                //             fullWidth
+                //         >
+                //             <MenuItem key='website' value='1'>Website</MenuItem>
+                //             <MenuItem key='mobile' value='2'>Mobile</MenuItem>
+                //             <MenuItem key='system' value='3'>System</MenuItem>
+                //         </TextField>
+                //         <Editor
+                //             initialValue="<p>This is the initial content of the editor</p>"
+                //             init={{
+                //             plugins: 'link image code',
+                //             toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                //             }}
+                //             onChange={this.handleEditorChange}
+                //         />
+                //         <TextField inputRef={dur => this.duration = dur}  margin="dense" id="name"  label="Kelas Duration" type="text" fullWidth />
+                //         <TextField inputRef={p => this.price = p}  margin="dense" id="name"  label="Price" type="text" fullWidth />
+                //         <CustomInput type='file' id='kelasImage'  label={this.state.addImageFileName} onChange={this.onAddImageFileChange}/>
+                //     </DialogContent>
+                //     <DialogActions>
+                //     <Button onClick={this.handleClose} color="primary">
+                //         Cancel
+                //     </Button>
+                //     <Button onClick={this.onBtnSaveClick} color="primary">
+                //         Save
+                //     </Button>
+                //     </DialogActions>
+                // </Dialog>
+            // )
         })
     }
 
@@ -140,8 +209,8 @@ class ManageKelas extends Component{
 
             Axios.post(API_URL + '/kelas/addKelas', formData, headers)
             .then((res)=>{
-                console.log(res.data)
                 this.setState({kelasData: res.data, open: false})
+                console.log(this.state.kelasName)
             }).catch((err)=>{
                 console.log(err)
             })
@@ -149,6 +218,45 @@ class ManageKelas extends Component{
         }else{
             alert('name kelas harus diisi!')
         }
+
+    }
+
+    onBtnUpdateClick = () => {
+        var kelasName = this.Ename.value
+        var catId = this.state.category ? this.state.category : this.state.editData.catId
+        var description = this.state.description ? this.state.description : this.state.editData.description
+        var kelasDuration = this.Eduration.value
+        var price = this.Eprice.value
+
+       
+        var formData = new FormData()
+        const token = localStorage.getItem('token')
+        var headers = {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+        
+        var data = {
+            kelasName,
+            catId,
+            description,
+            kelasDuration,
+            price
+        }
+        console.log(data)
+
+            formData.append('image', this.state.editImageFile)
+            formData.append('data', JSON.stringify(data))
+
+            Axios.put(API_URL + '/kelas/editKelas/'+this.state.editData.idKelas, formData, headers)
+            .then((res)=>{
+                this.setState({kelasData: res.data, openEdit: false})
+                console.log(this.state.kelasName)
+            }).catch((err)=>{
+                console.log(err)
+            })
 
     }
 
@@ -163,12 +271,14 @@ class ManageKelas extends Component{
         Axios.delete(`${API_URL}/kelas/deleteKelas/${id}`, headers)
         .then((res)=>{
             this.setState({kelasData: res.data})
+            console.log(this.state.kelasData)
         }).catch((err)=>[
             console.log(err)
         ])
     }
 
     render(){
+        console.log(this.state.kelasData)
         const {textField, menu} = useStyles
         if(this.state.kelasData.length === 0){
             return <LoadingPage/>
@@ -246,6 +356,54 @@ class ManageKelas extends Component{
                         </TableBody>
                     </Table>
                 </div>
+
+                {/* ================================- EDIT KELAS -=================================== */}
+                <Dialog open={this.state.openEdit} TransitionComponent={Transition} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Edit Kelas</DialogTitle>
+                    <DialogContent>
+                        <TextField autoFocus margin='dense' inputRef={el => this.Ename = el} defaultValue={this.state.editData.kelasName}  label="Kelas Name" type='text' fullWidth/>
+                        <TextField
+                            id="category"
+                            select
+                            label="Category"
+                            className={textField}
+                            value={this.state.category ? this.state.category : this.state.editData.catId}
+                            onChange={this.handleChange()}
+                            SelectProps={{
+                                MenuProps: {
+                                    className: menu,
+                                },
+                            }}
+                            margin="normal"
+                            fullWidth
+                        >
+                            <MenuItem key='website' value='1'>Website</MenuItem>
+                            <MenuItem key='mobile' value='2'>Mobile</MenuItem>
+                            <MenuItem key='system' value='3'>System</MenuItem>
+                        </TextField>
+                        <Editor
+                            // initialValue="<p>This is the initial content of the editor</p>"
+                            value={this.state.editData.description}
+                            // defaultValue={this.state.editData.description}
+                            init={{
+                            plugins: 'link image code',
+                            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                            }}
+                            onChange={this.handleEditorChange}
+                        />
+                        <TextField inputRef={dur => this.Eduration = dur} defaultValue={this.state.editData.kelasDuration}  margin="dense" id="name"  label="Kelas Duration" type="text" fullWidth />
+                        <TextField inputRef={p => this.Eprice = p} defaultValue={this.state.editData.price}  margin="dense" id="name"  label="Price" type="text" fullWidth />
+                        <CustomInput type='file' id='kelasImage'  label={this.state.editImageFileName ? this.state.editImageFileName : this.state.editData.image} onChange={this.onEditImageFileChange}/>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={()=>this.setState({openEdit: false, selectedEditKelasId:0})} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={this.onBtnUpdateClick} color="primary">
+                        Update
+                    </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
