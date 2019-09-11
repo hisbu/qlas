@@ -15,7 +15,7 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem} from 'reactstrap';
-import qian from '../supports/img/qian.jpg'
+// import qian from '../supports/img/qian.jpg'
 // import Logo from './../supports/img/logo3.png'
 import Logo2 from './../supports/img/logo1.png'
 import { onUserLogout } from './../redux/actions'

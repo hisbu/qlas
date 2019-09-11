@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect} from 'react-redux'
-import {pagePosition } from './../../redux/actions'
+import {pagePosition } from '../../redux/actions'
 import {Paper} from '@material-ui/core'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap'
 import classnames from 'classnames'

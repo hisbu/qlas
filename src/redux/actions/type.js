@@ -8,3 +8,5 @@ export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
 export const ADD_KELAS_SUCCESS = 'ADD_KELAS_SUCCESS';
 export const ADD_KELAS_FAILED = 'ADD_KELAS_FAILED';
 
+// Kelas data
+export const KELAS_INIT = 'KELAS_INIT'

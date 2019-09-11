@@ -4,6 +4,10 @@ import { BtnBgQcolor } from './../component/btnQlas'
 import CardCatalogue from './../component/card'
 import { connect } from 'react-redux'
 import { pagePosition } from '../redux/actions'
+import LoadingPage from './loadingPage'
+import Axios from 'axios'
+import { API_URL} from '../helpers'
+import {Link} from 'react-router-dom'
 // import image
 import Listening from './../../src/supports/img/internet.png'
 import Exam from './../../src/supports/img/trophy.png'
@@ -13,15 +17,45 @@ import Catalog from '../supports/img/programmer.png'
 // import Testimoni from './../supports/img/testimonyhome.jpg'
 class LandingPage extends Component{
     state={
-        location: 'landing'
+        location: 'landing',
+        kelasData: ''
     }
 
     componentDidMount(){
         this.props.pagePosition(this.state.location)
         console.log(this.props.pageLocation)
         console.log(this.state.location)
+
+        Axios.get(`${API_URL}/kelas/getKelas`)
+        .then((res)=>{
+            console.log(res.data[0].kelasName)
+            this.setState({kelasData: res.data})
+            // this.props.kelasInit(res.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
+    renderKelasData = () => {
+        // var kelasData = this.props.kelas
+        return this.state.kelasData.slice(0,4).map((item)=>{
+            return (
+                <div className='col-md-6 mt-4 '>
+                    <CardCatalogue titleCard={item.kelasName} imageCard={`${API_URL}${item.image}`}/>
+                </div>
+            )
+        })
+    }
+
+    onTombolPencet=()=>{
+        alert('test')
+        return <Link to='/detail'/>
     }
     render(){
+        // console.log(this.props.kelas)
+        if(this.state.kelasData === ''){
+            return <LoadingPage/>
+        }
         return(
             <div className='landingPage'>
                 {/* <NavBar/> */}
@@ -123,18 +157,8 @@ class LandingPage extends Component{
                             </div>
                             <div className='col-md-8 col-sm-12 '>
                                 <div className='row d-flex justify-content-between'>
-                                    <div className='col-md-6 mt-4 '>
-                                        <CardCatalogue/>
-                                    </div>
-                                    <div className='col-md-6 mt-4 '>
-                                        <CardCatalogue/>
-                                    </div>
-                                    <div className='col-md-6 mt-4'>
-                                        <CardCatalogue/>
-                                    </div>
-                                    <div className='col-md-6 mt-4'>
-                                        <CardCatalogue/>
-                                    </div>
+                                    <input type='button' onClick={this.onTombolPencet} value='Pencet aja'/>
+                                    {this.renderKelasData()}
                                 </div>
                             </div>
                             
@@ -165,34 +189,7 @@ class LandingPage extends Component{
                         </div>
                     </div>
                 </section>
-                
-                {/*  ============= Start Footer ============= */}
-                {/* <section id='sec_footer'>
-                    <div className='footer_bg '>
-                        <div className='container'>
-                            <div className='row'>
-                                <div className='col-3'>
-                                    <div className='footer_title'>Perusahaan</div>
-                                    <li>Tentang Kami</li>
-                                    <li>Kesempatan Karir</li>
-                                </div>
-                                <div className='col-3'>
-                                    <div className='footer_title'>Produk</div>
-                                    <li>Kelas Premium</li>
-                                    <li>Kelas Gratis</li>
-                                </div>
-                                <div className='col-3'>
-                                    <div className='footer_title'>Bantuan</div>
-                                    <li>hubungi Kami</li>
-                                    <li>Kesempatan Karir</li>
-                                </div>
-                                <div className='col-3'>Sosmed</div>
-                            </div>
-                            <center><div className='mt-5'>@2019 PT Indonesia Pintar Bersama. All Rights Reserver.</div></center>
-                        </div>
-                    </div>
-                </section> */}
-
+               
             </div>
         )
     }
@@ -200,7 +197,8 @@ class LandingPage extends Component{
 
 const mapStatetoProps = (state) => {
     return {
-        pageLocation: state.page
+        pageLocation: state.page,
+        kelas       : state.kelas.kelasData
     }
 }
 export default connect(mapStatetoProps, {pagePosition}) (LandingPage); 
