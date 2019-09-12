@@ -41,7 +41,7 @@ class LandingPage extends Component{
         return this.state.kelasData.slice(0,4).map((item)=>{
             return (
                 <div className='col-md-6 mt-4 '>
-                    <CardCatalogue titleCard={item.kelasName} imageCard={`${API_URL}${item.image}`}/>
+                    <CardCatalogue titleCard={item.kelasName} imageCard={`${API_URL}${item.image}`} kelasId={`/detail?id=${item.idKelas}`}/>
                 </div>
             )
         })
@@ -52,7 +52,7 @@ class LandingPage extends Component{
         return <Link to='/detail'/>
     }
     render(){
-        // console.log(this.props.kelas)
+        
         if(this.state.kelasData === ''){
             return <LoadingPage/>
         }
@@ -157,7 +157,7 @@ class LandingPage extends Component{
                             </div>
                             <div className='col-md-8 col-sm-12 '>
                                 <div className='row d-flex justify-content-between'>
-                                    <input type='button' onClick={this.onTombolPencet} value='Pencet aja'/>
+                                    
                                     {this.renderKelasData()}
                                 </div>
                             </div>

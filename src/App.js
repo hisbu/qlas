@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { keepLogin, kelasInit } from './redux/actions'
 import Axios from 'axios'
 import { API_URL } from './helpers'
+import queryString from 'query-string'
 // page
 import LandingPage from './pages/landingPage'
 // import Landing from './pages/landing.js'
@@ -29,11 +30,16 @@ class App extends Component{
   componentDidMount(){
     this.props.keepLogin()
     var id = window.location.href
-    console.log(id)
-    console.log(this.props.username)
+    // var test = this.props.match.params.kelasId
+    // let url = this.props.location.pathname;
+    // let params = queryString.parse(url);
+    // console.log(id)
+    // console.log(params)
+    // console.log(this.props.username)
 
     Axios.get(`${API_URL}/kelas/getKelas`)
         .then((res)=>{
+            console.log(res.data)
             console.log(res.data[0].kelasName)
             // this.setState({kelasData: res.data})
             this.props.kelasInit(res.data)

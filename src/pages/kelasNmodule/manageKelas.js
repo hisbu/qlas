@@ -8,6 +8,7 @@ import {
         } from '@material-ui/core'
 import { CustomInput } from 'reactstrap'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
 import { API_URL } from '../../helpers'
 import LoadingPage from '../loadingPage'
 import { Editor } from '@tinymce/tinymce-react'
@@ -98,7 +99,7 @@ class ManageKelas extends Component{
                 return(
                     <TableRow>
                         <TableCell>{i+1}</TableCell>
-                        <TableCell>{val.kelasName}</TableCell>
+                        <TableCell><Link to={`/detail?id=${val.idKelas}`}>{val.kelasName}</Link></TableCell>
                         <TableCell>{val.category}</TableCell>
                         <TableCell>{val.description}</TableCell>
                         <TableCell>{val.kelasDuration} days</TableCell>

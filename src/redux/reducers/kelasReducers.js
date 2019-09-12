@@ -3,7 +3,7 @@ import {
 } from '../actions/type'
 
 const INITIAL_STATE = {
-    kelasData: null
+    kelasData: ''
 }
 
 export default  (state = INITIAL_STATE, action) => {
