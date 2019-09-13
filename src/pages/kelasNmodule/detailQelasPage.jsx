@@ -4,6 +4,7 @@ import {pagePosition } from '../../redux/actions'
 import {Paper} from '@material-ui/core'
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap'
 import classnames from 'classnames'
+import { Link} from 'react-router-dom'
 import './style.css'
 import image4 from './../../supports/img/carousel/img4.jpg'
 import desktop from './../../supports/img/desktop.png'
@@ -63,9 +64,7 @@ class DetailQelas extends Component{
                     <img src={`${API_URL}${this.state.kelasDetail.image}`} alt='4a'/>
                 </div>`
                 <Paper className='paperDetail mb-4' >
-                    <section id='sectionBuy' className='sectionBuy'>
-                        <div className='buyBotton'>Berlangganan</div>
-                    </section>
+                    
                     <div className='kelas_pic'>
                         <img src={desktop} width='15%' alt='4b'/>
                         <p className='title_small'>Disusun Oleh : {this.state.kelasDetail.penyusun}</p>
@@ -109,21 +108,18 @@ class DetailQelas extends Component{
                             <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
                                 <Row>
-                                <Col sm="12 mt-3">
+                                <Col sm="9 mt-3">
                                     <div id='kelasDesc'>
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
-                                         {this.state.kelasDetail.description}
+                                        <div dangerouslySetInnerHTML={{ __html: this.state.kelasDetail.description }} />
                                     </div>
+                                </Col>
+                                <Col sm="3 mt-3">
+                                    <section id='sectionBuy' className='sectionBuy'>
+                                        <div className='contentBuySection'>Anda belum dapat mempelajari kelas ini. Yuk berlangganan sekarang agar bisa belajar di Kelas ini dan juga Materi Qelas Academy lainnya.</div>
+                                        <Link to='/subscribe' style={{ textDecoration: 'none' }}>
+                                            <div className='buyBotton'>Berlangganan Sekarang</div>
+                                        </Link>
+                                    </section>
                                 </Col>
                                 </Row>
                             </TabPane>

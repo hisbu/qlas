@@ -10,3 +10,6 @@ export const ADD_KELAS_FAILED = 'ADD_KELAS_FAILED';
 
 // Kelas data
 export const KELAS_INIT = 'KELAS_INIT'
+
+//paket Data
+export const PAKET_INIT = 'PAKET_INIT'

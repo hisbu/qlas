@@ -21,7 +21,8 @@ import Verified from './pages/registerLogin/verifikasi'
 import WaitingVerification from './pages/registerLogin/WaitingVerification'
 import Profile from './pages/user/profile'
 import ManageKelas from './pages/kelasNmodule/manageKelas'
-
+import Cart from './pages/transaksi/cart'
+import Subscribe from './pages/transaksi/subscribe'
 
 class App extends Component{
   state = {
@@ -67,8 +68,9 @@ class App extends Component{
           <Route path='/waitingverification' component={WaitingVerification}/>
           <Route path='/loading' component={LoadingPage}/>
           <Route path='/profile' component={Profile}/>
-
+          <Route path='/cart' component={Cart}/>
           <Route path='/managekelas' component={ManageKelas}/>
+          <Route path='/subscribe' component={Subscribe}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>

@@ -6,6 +6,7 @@ import {
         Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
         FormLabel, RadioGroup, FormControlLabel, Radio
         } from '@material-ui/core'
+import {EditOutlined, DeleteOutline, Check, CancelOutlined} from '@material-ui/icons'
 import { CustomInput } from 'reactstrap'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -13,6 +14,7 @@ import { API_URL } from '../../helpers'
 import LoadingPage from '../loadingPage'
 import { Editor } from '@tinymce/tinymce-react'
 const numeral = require('numeral')
+
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -97,18 +99,24 @@ class ManageKelas extends Component{
         return kelasData.map((val, i) => {
             if(val.idKelas !== this.selectedEditKelasId){
                 return(
-                    <TableRow>
+                    <TableRow >
                         <TableCell>{i+1}</TableCell>
                         <TableCell><Link to={`/detail?id=${val.idKelas}`}>{val.kelasName}</Link></TableCell>
                         <TableCell>{val.category}</TableCell>
-                        <TableCell>{val.description}</TableCell>
+                        <TableCell className='fontCell'><div dangerouslySetInnerHTML={{ __html:val.description? val.description.split(' ').splice(0,8).join(' '): null}}/></TableCell>
                         <TableCell>{val.kelasDuration} days</TableCell>
                         <TableCell>Rp. {numeral(val.price).format('0,0')}</TableCell>
                         <TableCell>{val.level}</TableCell>
                         <TableCell>{val.penyusun}</TableCell>
                         <TableCell><img src={`${API_URL}${val.image}`} alt={val.kelasName} height='75px'/></TableCell>
-                        <TableCell><Input type='button' className='btn btn-primary' value='Edit' onClick={()=> this.setState({selectedEditKelasId: val.idKelas, openEdit:true, editData: val})} /></TableCell>
-                        <TableCell><Input type='button' className='btn btn-danger' value='Delete' onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/></TableCell>
+                        <TableCell>
+                            {/* <Input type='button' className='btn btn-primary' value='Edit' onClick={()=> this.setState({selectedEditKelasId: val.idKelas, openEdit:true, editData: val})} /> */}
+                            <EditOutlined style={{pointerEvents:'cursor'}}  onClick={()=> this.setState({selectedEditKelasId: val.idKelas, openEdit:true, editData: val})}/>
+                        </TableCell>
+                        <TableCell>
+                            <DeleteOutline onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/>
+                            {/* <Input type='button' className='btn btn-danger' value='Delete' onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/> */}
+                        </TableCell>
                     </TableRow>
                 )
             }
@@ -321,7 +329,7 @@ class ManageKelas extends Component{
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>No</TableCell>
+                                <TableCell style={{width:'10%'}}>No</TableCell>
                                 <TableCell>Kelas Name</TableCell>
                                 <TableCell>Category</TableCell>
                                 <TableCell>Descriptioin</TableCell>
@@ -340,7 +348,7 @@ class ManageKelas extends Component{
                 </div>
 
                 {/* ================================- EDIT KELAS -=================================== */}
-                <Dialog open={this.state.openEdit} TransitionComponent={Transition} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                <Dialog open={this.state.openEdit} TransitionComponent={Transition} onClose={this.handleClose} aria-labelledby="form-dialog-title"  maxWidth="xl">
                     <DialogTitle id="form-dialog-title">Edit Kelas</DialogTitle>
                     <DialogContent>
                         <TextField autoFocus margin='dense' inputRef={el => this.Ename = el} defaultValue={this.state.editData.kelasName}  label="Kelas Name" type='text' fullWidth/>
