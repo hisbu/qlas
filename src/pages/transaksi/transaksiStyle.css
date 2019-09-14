@@ -1,3 +1,9 @@
+:root{
+    /* --qColor: #3b7f7e; */
+    --qColor: #F78A2F;
+    --qColorSecondry: #1A2351;
+  }
+
 #cartPage{
     min-height: 90vh;
 }
@@ -16,4 +22,55 @@
 
 .leftSec{
     border-right: 0.5px solid grey;
+}
+
+#confirmPage{
+    background-color: #f7f7f7;
+}
+
+.confirm{
+    width: 70%;
+    padding: 2em 0 0 0;
+    background-color: #ebebeb;
+    margin: 2em 0;
+    border-radius: 1em 1em 0 0;
+    border: 0.5px solid #d6d6d6;
+}
+
+.box1{
+    background-color: #fff;
+    border-radius: 1em 1em 0 0;
+    padding: 2em 0;
+}
+
+.box1 span{
+    margin-top: 0.5em;
+    font-size: 12px;
+    color:#858585;
+}
+
+.bayar{
+    padding: 0.5em;
+    background-color: #ffb476;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.bayar:hover{
+    background-color:  var(--qColor);
+}
+
+.cancel a{
+    text-decoration: none !important;
+    display: block;
+    margin: -1em 0 1em 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.cancel a:hover{
+    color: #535353;
 }

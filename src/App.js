@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { keepLogin, kelasInit } from './redux/actions'
+import { keepLogin, kelasInit, paketInit } from './redux/actions'
 import Axios from 'axios'
 import { API_URL } from './helpers'
 import queryString from 'query-string'
@@ -23,6 +23,7 @@ import Profile from './pages/user/profile'
 import ManageKelas from './pages/kelasNmodule/manageKelas'
 import Cart from './pages/transaksi/cart'
 import Subscribe from './pages/transaksi/subscribe'
+import ConfirmPage from './pages/transaksi/konfirmasi'
 
 class App extends Component{
   state = {
@@ -37,6 +38,7 @@ class App extends Component{
     // console.log(id)
     // console.log(params)
     // console.log(this.props.username)
+    this.props.paketInit()
 
     Axios.get(`${API_URL}/kelas/getKelas`)
         .then((res)=>{
@@ -71,6 +73,7 @@ class App extends Component{
           <Route path='/cart' component={Cart}/>
           <Route path='/managekelas' component={ManageKelas}/>
           <Route path='/subscribe' component={Subscribe}/>
+          <Route path='/confirmation' component={ConfirmPage}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>
@@ -84,4 +87,4 @@ const mapStateToProps = ({auth}) =>{
     username    : auth.username
   }
 }
-export default connect(mapStateToProps, {keepLogin, kelasInit}) (App);
+export default connect(mapStateToProps, {keepLogin, kelasInit, paketInit}) (App);

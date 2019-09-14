@@ -13,6 +13,7 @@ export const KELAS_INIT = 'KELAS_INIT'
 
 //paket Data
 export const PAKET_INIT = 'PAKET_INIT'
+export const SELECTED_PAKET = 'SELECTED_PAKET'
 
 //Transaction
 export const TRANSACTION_SUCCESS = 'TRANSACTION_SUCCESS'

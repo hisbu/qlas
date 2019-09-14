@@ -13,6 +13,7 @@ import queryString from 'query-string'
 import _ from 'lodash'
 import Axios from 'axios'
 import {API_URL} from '../../helpers'
+import LoadingPage from '../loadingPage'
 
 class DetailQelas extends Component{
     state = {
@@ -37,6 +38,7 @@ class DetailQelas extends Component{
     componentDidMount(){
         var position = window.location.href.split('/')[3]
         this.props.pagePosition(position)
+
         let url = queryString.parse(this.props.location.search)
         Axios.get(`${API_URL}/kelas/getKelas?idKelas=${url.id}`)
         .then((res)=>{
@@ -55,7 +57,7 @@ class DetailQelas extends Component{
     }
     render(){
         if(!this.state.kelasDetail){
-            return <h2>loading.....</h2>
+            return <LoadingPage/>
         }
         console.log(this.props.kelas)
         return(

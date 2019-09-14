@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Paper, TextField, MenuItem, makeStyles} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import { connect } from 'react-redux'
+import { selectedPaket } from '../../redux/actions'
 import { API_URL } from '../../helpers'
 import Loading from '../loadingPage'
 import { BtnBgQcolor} from '../../component/btnQlas'
@@ -41,6 +43,10 @@ class SubscribePage extends Component{
         })
     }
 
+    componentDidUpdate(){
+        console.log(this.state.selectedPaket)
+    }
+
     renderPaket=()=>{
         return this.state.paket.map((val)=>{
             return(
@@ -50,11 +56,12 @@ class SubscribePage extends Component{
     }
 
     handleChange = name => event => {
-        console.log(event.target)
+        // console.log(event.target)
         this.setState({selectedPaket: event.target.value})
     // setValues({ ...values, [name]: event.target.value });
     };
     render(){
+        console.log(this.props.paket)
         if(!this.state.paket){
             return <Loading/>
         }
@@ -95,8 +102,8 @@ class SubscribePage extends Component{
                             ?
                                 <div>
                                     <h2>Rp. {numeral(this.state.selectedPaket.harga).format('0,0')}</h2>
-                                    <h5>{this.state.selectedPaket.durasi} days</h5>
-                                    <Link to='/payment?'  style={{ textDecoration: 'none' }}>
+                                    <h5>{this.state.selectedPaket.durasi} Hari</h5>
+                                    <Link to={`/confirmation?id=${this.state.selectedPaket.idpaket}`} style={{ textDecoration: 'none' }} onClick={()=>this.props.selectedPaket(this.state.selectedPaket)}>
                                         <BtnBgQcolor title={'Berlangganan sekarang'}/>
                                     </Link>
                                 </div>
@@ -112,4 +119,9 @@ class SubscribePage extends Component{
     }
 }
 
-export default SubscribePage
+const mapStateToProps = ({paket}) =>{
+    return{
+        paket: paket
+    }
+}
+export default connect(mapStateToProps, {selectedPaket}) (SubscribePage)
