@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Paper, TextField, MenuItem, makeStyles} from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import Axios from 'axios'
 import { API_URL } from '../../helpers'
 import Loading from '../loadingPage'
@@ -82,11 +83,6 @@ class SubscribePage extends Component{
                                 fullWidth
                             >
                                 {this.renderPaket()}
-                                {/* <MenuItem key='30' value='30'>30 Hari - Rp. 500.000</MenuItem>
-                                <MenuItem key='60' value='60'>60 Hari - Rp. 900.000</MenuItem>
-                                <MenuItem key='90' value='90'>90 Hari - Rp. 1.200.000</MenuItem>
-                                <MenuItem key='180' value='180'>180 Hari - Rp. 2.250.000</MenuItem>
-                                <MenuItem key='365' value='365'>365 Hari - Rp. 4.200.000</MenuItem> */}
                             </TextField>
                             <ul style={{textAlign:'left', marginLeft:'1em'}}>
                                 <li>Akses ke semua materi kelas di Qelas Academy</li>
@@ -100,7 +96,9 @@ class SubscribePage extends Component{
                                 <div>
                                     <h2>Rp. {numeral(this.state.selectedPaket.harga).format('0,0')}</h2>
                                     <h5>{this.state.selectedPaket.durasi} days</h5>
-                                    <BtnBgQcolor title={'Berlangganan sekarang'}/>
+                                    <Link to='/payment?'  style={{ textDecoration: 'none' }}>
+                                        <BtnBgQcolor title={'Berlangganan sekarang'}/>
+                                    </Link>
                                 </div>
                             :
                             null
