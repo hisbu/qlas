@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Paper } from '@material-ui/core'
+import {Link} from 'react-router-dom'
 import Loading from '../loadingPage'
 import queryString from 'query-string'
 const numeral = require('numeral')
@@ -28,9 +29,11 @@ class confirmation extends Component{
                                 <h1> Rp. {numeral(this.props.selectedPaket.harga).format('0,0')}</h1>
                                 <span><i>*dengan menekan tombol lanjut pembayaran<br/> anda akan diarahkan ke halaman detail dan cara pembayaran</i></span>
                             </div>
-                            <div className='bayar'>
-                                LANJUT PEMBAYARAN
-                            </div>
+                            <Link to='/payment' style={{textDecoration:'none'}}>
+                                <div className='bayar'>
+                                    LANJUT PEMBAYARAN
+                                </div>
+                            </Link>
                         </center>
                     </div>
                     <div className='cancel'>

@@ -21,7 +21,7 @@ import Verified from './pages/registerLogin/verifikasi'
 import WaitingVerification from './pages/registerLogin/WaitingVerification'
 import Profile from './pages/user/profile'
 import ManageKelas from './pages/kelasNmodule/manageKelas'
-import Cart from './pages/transaksi/cart'
+import Payment from './pages/transaksi/payment'
 import Subscribe from './pages/transaksi/subscribe'
 import ConfirmPage from './pages/transaksi/konfirmasi'
 
@@ -70,7 +70,7 @@ class App extends Component{
           <Route path='/waitingverification' component={WaitingVerification}/>
           <Route path='/loading' component={LoadingPage}/>
           <Route path='/profile' component={Profile}/>
-          <Route path='/cart' component={Cart}/>
+          <Route path='/payment' component={Payment}/>
           <Route path='/managekelas' component={ManageKelas}/>
           <Route path='/subscribe' component={Subscribe}/>
           <Route path='/confirmation' component={ConfirmPage}/>

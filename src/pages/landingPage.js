@@ -71,7 +71,9 @@ class LandingPage extends Component{
                                 Jadilah tuan rumah di negeri sendiri dengan belajar langsung dari para inovator dan developer expert
                                 </div>
                                 <div className='jb_btn'>
-                                    <BtnBgQcolor title={'Daftar Gratis Sekarang'}/>
+                                    <Link to='/register' style={{textDecoration:'none'}}>
+                                        <BtnBgQcolor title={'Daftar Gratis Sekarang'}/>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
