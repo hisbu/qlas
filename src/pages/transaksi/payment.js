@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 // import { Link } from 'react-router-dom'
 import './transaksiStyle.css'
-// import Axios from 'axios'
-// import { API_URL } from '../../helpers'
+import Axios from 'axios'
+import { API_URL } from '../../helpers'
 import Bca from '../../supports/img/BCA_logo.svg'
 import Mandiri from '../../supports/img/Bank_Mandiri_logo.svg'
 import { 
@@ -14,7 +14,9 @@ import { DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
 import { CustomInput } from 'reactstrap'
 import DateFnsUtils from '@date-io/date-fns';
 import { connect } from 'react-redux'
-
+import queryString from 'query-string'
+import LoadingPage from '../loadingPage'
+const numeral = require('numeral')
 const useStyles = makeStyles(theme => ({
     textField: {
       marginLeft: theme.spacing(1),
@@ -39,14 +41,25 @@ class Payment extends Component{
         open                : false,
         addImageFileName    : 'Upload Bukti Bayar...', 
         addImageFile        : undefined, 
-        selectedDate        : new Date()
+        selectedDate        : new Date(),
+        transData           :''
     }
 
     componentDidMount(){
+        let url = queryString.parse(this.props.location.search)
+        Axios.get(`${API_URL}/transaction/getTransaction?idtransaction=${url.i}`)
+        .then((res)=>{
+            console.log(res.data)
+            console.log(res.data[0].kelasName)
+            this.setState({transData: res.data[0]})
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
     componentDidUpdate(){
         console.log(this.props.selectedPaket)
         console.log(this.props.userId)
+        console.log(this.state.transData)
         
     }
 
@@ -76,6 +89,9 @@ class Payment extends Component{
         this.setState({level: event.target.value})
     }
     render(){
+        if(!this.state.transData){
+            return <LoadingPage/>
+        }
         console.log(this.state.selectedDate)
         console.log(this.props.transaksi)
         const {textField, menu} = useStyles
@@ -84,14 +100,14 @@ class Payment extends Component{
                 <div className='container  mt-5 mb-5 d-flex justify-content-center align-items-center '>
                     <div className='content'>
                         <div className='title '>
-                            <h4>Invoive {this.props.transaksi.invoice}</h4>
+                            <h4>Invoive #{this.state.transData.invoice}</h4>
                             <p>tanggal</p>
                         </div>
                         <div className='isi mt-2'>
-                            <p>To : Ahmad hisbullah</p>
+                            <p>To : {this.state.transData.NamaUser}</p>
                             <div className='harga'>
-                                <h4>Paket Qelas 30 hari</h4>
-                                <h1>Rp. 500.320</h1>
+                                <h4>Paket Qelas {this.state.transData.durasi} hari</h4>
+                                <h1>Rp. {numeral(this.state.transData.harga).format('0,0')}</h1>
                             </div>
                             <p><i>*Tiga digit angka paling akhir, merupakan kode unik untuk transaksi anda, <br/> monhon untuk melakukan pembayaran sesuai nilai tagihan yang tertera. </i></p>
                         </div>

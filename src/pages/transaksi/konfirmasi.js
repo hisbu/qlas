@@ -29,39 +29,47 @@ class confirmation extends Component{
         var harga = this.props.selectedPaket.harga
         var email = this.props.email
 
-        var formData = new FormData()
-        const token = localStorage.getItem('token')
-        var headers = {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data'
+        if(userId){
+            var formData = new FormData()
+            const token = localStorage.getItem('token')
+            var headers = {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                    // 'Content-Type': 'multipart/form-data'
+                }
             }
-        }
-        var data = {
-            userId,
-            paketId,
-            durasi,
-            harga,
-            email
-        }
-        console.log(data)
+            var data = {
+                userId,
+                paketId,
+                durasi,
+                harga,
+                email
+            }
+            console.log(data)
 
-        formData.append('data', JSON.stringify(data))
-        console.log(formData)
-        Axios.post(`${API_URL}/transaction/addTransaction`, formData, headers)
-        .then((res)=>{
-            console.log(res.data)
-            this.props.transaction(res.data[0])
-            this.setState({loading: false, transData: res.data[0]})
-        }).catch((err)=>{
-            console.log(err)
-        })
+            formData.append('data', JSON.stringify(data))
+
+            var a = JSON.stringify(data)
+            console.log(formData.getAll)
+
+            Axios.post(`${API_URL}/transaction/addTransaction`, data, headers)
+            .then((res)=>{
+                console.log(res.data)
+                this.props.transaction(res.data[0])
+                this.setState({loading: false, transData: res.data[0]})
+
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }else{
+            alert('something wrong')
+        }
     }
    
     render(){
         console.log(this.props.selectedPaket)
         if(this.state.transData){
-            return <Redirect to='/payment'/>
+            return <Redirect to={`/payment?i=${this.state.transData.idtransaction}`}/>
         }
         return(
             <section id='confirmPage'>
