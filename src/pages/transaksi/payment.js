@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import './transaksiStyle.css'
-import Axios from 'axios'
-import { API_URL } from '../../helpers'
+// import Axios from 'axios'
+// import { API_URL } from '../../helpers'
 import Bca from '../../supports/img/BCA_logo.svg'
 import Mandiri from '../../supports/img/Bank_Mandiri_logo.svg'
 import { 
@@ -10,8 +10,10 @@ import {
     Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
     FormLabel, RadioGroup, FormControlLabel, Radio
     } from '@material-ui/core'
+import { DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
 import { CustomInput } from 'reactstrap'
 import DateFnsUtils from '@date-io/date-fns';
+import { connect } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -34,27 +36,22 @@ const useStyles = makeStyles(theme => ({
 
 class Payment extends Component{
     state = {
-        kelasData           :'',
-        editData            :'',
         open                : false,
-        openEdit            : false,
-        category            :'',
-        level               :'',
-        addImageFileName    : 'Select Image Kelas...', 
+        addImageFileName    : 'Upload Bukti Bayar...', 
         addImageFile        : undefined, 
-        description         : '',
-        selectedEditKelasId : 0,
-        editImageFileName   : '',
-        editImageFile       : undefined,
-        selectedDate        : new Date('2014-08-18T21:11:54')
+        selectedDate        : new Date()
     }
 
     componentDidMount(){
+    }
+    componentDidUpdate(){
+        console.log(this.props.selectedPaket)
+        console.log(this.props.userId)
         
     }
 
     handleDateChange = (date) =>{
-        setSelectedDate(date);
+        this.setState({SelectedDate:date})
     }
 
     onAddImageFileChange = (e) => {
@@ -79,13 +76,15 @@ class Payment extends Component{
         this.setState({level: event.target.value})
     }
     render(){
+        console.log(this.state.selectedDate)
+        console.log(this.props.transaksi)
         const {textField, menu} = useStyles
         return(
             <div id='paymentPage' className='paymentPage'>
                 <div className='container  mt-5 mb-5 d-flex justify-content-center align-items-center '>
                     <div className='content'>
                         <div className='title '>
-                            <h4>Invoive #QLS09142019889</h4>
+                            <h4>Invoive {this.props.transaksi.invoice}</h4>
                             <p>tanggal</p>
                         </div>
                         <div className='isi mt-2'>
@@ -111,7 +110,7 @@ class Payment extends Component{
                             </div>
                         </div>
                         {/* <Link to='' style={{textDecoration:'none'}}> */}
-                            <div className='konfirmasi'  onClick={this.handleClickOpen}>
+                            <div className='konfirmasi' onClick={this.handleClickOpen}>
                                 Konfirmasi Pembayaran
                             </div>
                         {/* </Link> */}
@@ -131,22 +130,18 @@ class Payment extends Component{
                         <RadioGroup aria-label='level' name='level' value={this.state.level}  onChange={this.onRadioLevelChange}>
                             <FormControlLabel value='bca' control={<Radio color='primary'/>} label='Bank BCA'/>
                             <FormControlLabel value='mandiri' control={<Radio color='primary'/>} label='Bank Mandiri'/>
-                        </RadioGroup> 
-                        <KeyboardDatePicker
-                            margin="normal"
-                            id="date-picker-dialog"
-                            label="Date picker dialog"
-                            format="MM/dd/yyyy"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                        />
-                        <TextField inputRef={dur => this.duration = dur}  margin="dense" id="duration"  label="Kelas Duration" type="text" fullWidth />
-                        <TextField inputRef={p => this.price = p}  margin="dense" id="price"  label="Price" type="text" fullWidth />
-                        <CustomInput type='file' id='kelasImage'  label={this.state.addImageFileName} onChange={this.onAddImageFileChange}/>
-                        <TextField inputRef={penyusun => this.penyusun = penyusun}  margin="dense" id="penyusun"  label="Penyusun Materi" type="text" fullWidth />
+                        </RadioGroup>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                            <DateTimePicker
+                                autoOk
+                                ampm={false}
+                                disableFuture
+                                value={this.state.selectedDate}
+                                onChange={this.handleDateChange}
+                                label="Tanggal transfer"
+                            />
+                        </MuiPickersUtilsProvider>
+                        <CustomInput type='file' id='kelasImage' className='mt-2'  label={this.state.addImageFileName} onChange={this.onAddImageFileChange}/>
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={this.handleClose} color="primary">
@@ -162,4 +157,12 @@ class Payment extends Component{
     }
 }
 
-export default Payment;
+const mapsStateToProps = ({paket, auth, transaksi})=>{
+    return{
+        selectedPaket: paket.selectedPaket,
+        userId  : auth.userId,
+        transData   : transaksi.transaksi
+    }
+}
+
+export default connect(mapsStateToProps) (Payment);

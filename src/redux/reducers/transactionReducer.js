@@ -6,6 +6,7 @@ import {
 
 const INITIAL_STATE = {
     loading: false,
+    transaksi:'',
     userId:'',
     paketId:'',
     error:'',
@@ -15,9 +16,9 @@ const INITIAL_STATE = {
 export default  (state = INITIAL_STATE, action) => {
     switch(action.type){
         case TRANSACTION_ADD:
-            return {...INITIAL_STATE, ...action.payload, loading: true}
+            return {...INITIAL_STATE, loading: true}
         case TRANSACTION_SUCCESS:
-            return {...INITIAL_STATE, loading : false}
+            return {...state, transaksi: action.payload, loading : false}
         case TRANSACTION_FAIL:
             return {...INITIAL_STATE, loading: false, error: action.payload}
         default:

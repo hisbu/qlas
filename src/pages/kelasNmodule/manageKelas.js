@@ -179,10 +179,11 @@ class ManageKelas extends Component{
                 level,
                 penyusun
             }
+            
 
             formData.append('image', this.state.addImageFile)
             formData.append('data', JSON.stringify(data))
-
+            console.log(formData)
             Axios.post(API_URL + '/kelas/addKelas', formData, headers)
             .then((res)=>{
                 this.setState({kelasData: res.data, open: false})

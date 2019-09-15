@@ -37,7 +37,8 @@ class App extends Component{
     // let params = queryString.parse(url);
     // console.log(id)
     // console.log(params)
-    // console.log(this.props.username)
+    console.log(this.props.username)
+    console.log(this.props.userId)
     this.props.paketInit()
 
     Axios.get(`${API_URL}/kelas/getKelas`)
@@ -52,10 +53,12 @@ class App extends Component{
   }
 
   componentDidUpdate(){
+    console.log(this.state.kelasData)
+    console.log(this.props.username)
+    console.log(this.props.userId)
     // this.props.kelasInit(this.state.kelasData)
   }
   render(){
-    console.log(this.state.kelasData)
     return(
       <div>
         <NavBar/>
@@ -84,7 +87,8 @@ class App extends Component{
 
 const mapStateToProps = ({auth}) =>{
   return{
-    username    : auth.username
+    username    : auth.username,
+    userId      : auth
   }
 }
 export default connect(mapStateToProps, {keepLogin, kelasInit, paketInit}) (App);

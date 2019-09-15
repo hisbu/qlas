@@ -8,20 +8,14 @@ import { API_URL } from '../../helpers'
 import moment from 'moment'
 
 export const checkUot = (userId, paketId, harga)=>{
-    return (dispatch) => {
-        dispatch({ 
-            type    : TRANSACTION_ADD,
-            payload : {
-                userId,
-                paketId
-            }
-        })
-        var date = moment().format("YYYY-MM-DD h:mm:ss")
-        Axios.post(API_URL+ '/transaction/checkOut',{
-            userId, paketId, harga, date
-        }).then((res)=>{
-            console.log(res)
-        })
-        
+    return{
+        type: TRANSACTION_ADD
+    }
+}
+
+export const transaction = (transData) =>{
+    return{
+        type: TRANSACTION_SUCCESS,
+        payload: transData
     }
 }
