@@ -10,6 +10,7 @@ import TestPage from './../../pages/test'
 import HomeUser from './homeUser'
 import LoadingPage from './../loadingPage'
 import ProfilePage from './profile'
+import Subscription from './subscription'
 
 class DashboardUser extends Component{
 
@@ -30,7 +31,7 @@ class DashboardUser extends Component{
               <div className='sideMenu  col-2 '>
                 <div className='sideMenuItem'>
                   <Link to='/dashboard'><span>Home</span></Link>
-                  <Link to='/dashboard/test'><span>ke test page</span></Link>
+                  <Link to='/dashboard/subscription'><span>Subscription</span></Link>
                 </div>
               </div>
               {/* ============ START CONTENT CONTAINER ============ */}
@@ -39,6 +40,7 @@ class DashboardUser extends Component{
                     <Route path='/dashboard' component={HomeUser} exact/>
                     <Route path='/dashboard/test' component={TestPage}/>
                     <Route path='/dashboard/profilePage' component={ProfilePage}/>
+                    <Route path='/dashboard/subscription' component={Subscription}/>
                 </div>  
               </div>
             </div>

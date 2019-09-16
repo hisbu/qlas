@@ -49,6 +49,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { NTPClient } from 'ntpclient'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -92,6 +93,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// var ntpClient = require('ntp-client');
+
 export default function VerticalTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -102,7 +105,10 @@ export default function VerticalTabs() {
 
   return (
     <div className={classes.root}>
-      <Tabs
+      
+     
+        
+      {/* <Tabs
         orientation="vertical"
         variant="scrollable"
         value={value}
@@ -149,7 +155,7 @@ export default function VerticalTabs() {
         <div className='boks'></div>
         <div className='boks'></div>
         <div className='boks'></div>
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

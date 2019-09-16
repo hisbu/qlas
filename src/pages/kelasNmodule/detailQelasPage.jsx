@@ -36,6 +36,7 @@ class DetailQelas extends Component{
         }
     }
     componentDidMount(){
+        window.scrollTo(0,0)
         var position = window.location.href.split('/')[3]
         this.props.pagePosition(position)
 
@@ -126,23 +127,13 @@ class DetailQelas extends Component{
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
-                                {/* <Row>
-                                <Col sm="6">
-                                    <Card body>
-                                    <CardTitle>Special Title Treatment</CardTitle>
-                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                    <Button>Go somewhere</Button>
-                                    </Card>
-                                </Col>
-                                <Col sm="6">
-                                    <Card body>
-                                    <CardTitle>Special Title Treatment</CardTitle>
-                                    <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                                    <Button>Go somewhere</Button>
-                                    </Card>
-                                </Col>
-                                </Row> */}
-                                <MateriPage/>
+                                <MateriPage idKelas={this.state.kelasDetail.idKelas}/>
+                            </TabPane>
+                            <TabPane tabId="3">
+                                <h2>tab 3</h2>
+                            </TabPane>
+                            <TabPane tabId="4">
+                                <h2>tab 4</h2>
                             </TabPane>
                             </TabContent>
                         </div>

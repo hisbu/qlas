@@ -25,6 +25,8 @@ import Payment from './pages/transaksi/payment'
 import Subscribe from './pages/transaksi/subscribe'
 import ConfirmPage from './pages/transaksi/konfirmasi'
 import ManageKonfirmasi from './pages/Admin/manageKonfirmasi'
+import Subscription from './pages/user/subscription'
+import ManageModul from './pages/kelasNmodule/manageModul'
 
 class App extends Component{
   state = {
@@ -67,6 +69,8 @@ class App extends Component{
           <Route path='/' component={LandingPage} exact/>
           <Route path ='/dashboard' component = {DashboardUser}/>
           <Route path='/dashboard/test' component={TestPage}/>
+          <Route path='/dashboard/subscription' component={Subscription}/>
+          <Route path='/subscription' component={Subscription}/>
           <Route path='/detail' component={DetailQelas}/>
           <Route path='/login' component={Login}/>
           <Route path='/register' component={Register}/>
@@ -79,6 +83,7 @@ class App extends Component{
           <Route path='/subscribe' component={Subscribe}/>
           <Route path='/confirmation' component={ConfirmPage}/>
           <Route path='/manageKonf' component={ManageKonfirmasi}/>
+          <Route path='/manageModul' component={ManageModul}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>
