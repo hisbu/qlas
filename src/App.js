@@ -24,6 +24,7 @@ import ManageKelas from './pages/kelasNmodule/manageKelas'
 import Payment from './pages/transaksi/payment'
 import Subscribe from './pages/transaksi/subscribe'
 import ConfirmPage from './pages/transaksi/konfirmasi'
+import ManageKonfirmasi from './pages/Admin/manageKonfirmasi'
 
 class App extends Component{
   state = {
@@ -77,6 +78,7 @@ class App extends Component{
           <Route path='/managekelas' component={ManageKelas}/>
           <Route path='/subscribe' component={Subscribe}/>
           <Route path='/confirmation' component={ConfirmPage}/>
+          <Route path='/manageKonf' component={ManageKonfirmasi}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>

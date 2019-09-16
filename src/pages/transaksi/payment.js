@@ -8,14 +8,16 @@ import Mandiri from '../../supports/img/Bank_Mandiri_logo.svg'
 import { 
     makeStyles,
     Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
-    FormLabel, RadioGroup, FormControlLabel, Radio
+    FormLabel, RadioGroup, FormControlLabel, Radio, DialogContentText
     } from '@material-ui/core'
-import { DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers'
-import { CustomInput } from 'reactstrap'
+import { DateTimePicker, MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers'
+import { CustomInput, Spinner, FormGroup, Label, Input } from 'reactstrap'
 import DateFnsUtils from '@date-io/date-fns';
+import { format } from 'date-fns'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LoadingPage from '../loadingPage'
+import moment from 'moment'
 const numeral = require('numeral')
 const useStyles = makeStyles(theme => ({
     textField: {
@@ -35,14 +37,22 @@ const useStyles = makeStyles(theme => ({
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
+  const TransitionTerima = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="down" ref={ref} {...props} />;
+  });
+
 
 class Payment extends Component{
     state = {
         open                : false,
+        openTerima          : false,
         addImageFileName    : 'Upload Bukti Bayar...', 
         addImageFile        : undefined, 
-        selectedDate        : new Date(),
-        transData           :''
+        selectedDate        : new Date('2014-08-18'),
+        transData           :'',
+        bank                :'',
+        loading             : false,
+        date                : ''
     }
 
     componentDidMount(){
@@ -57,9 +67,9 @@ class Payment extends Component{
         })
     }
     componentDidUpdate(){
-        console.log(this.props.selectedPaket)
-        console.log(this.props.userId)
-        console.log(this.state.transData)
+        // console.log(this.props.selectedPaket)
+        // console.log(this.props.userId)
+        console.log(this.state.date)
         
     }
 
@@ -78,16 +88,72 @@ class Payment extends Component{
         }
     }
 
+    onBtnSaveClick=()=>{
+        this.setState({loading: true})
+        var invoice = this.state.transData.invoice
+        var nama = this.name.value
+        var noRek = this.rek.value
+        var nominal = this.nominal.value
+        var bank = this.state.bank
+        // var tanggal = this.state.selectedDate
+        var userId  = this.props.userId
+        var tanggal = this.refs.date.refs.innerDate.value
+
+       
+        // console.log(data)
+        
+        if(nama){
+            var formData = new FormData()
+            const token     = localStorage.getItem('token')
+            var headers = {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            var data = {
+                invoice,
+                nama,
+                noRek,
+                nominal,
+                bank,
+                tanggal,
+                userId
+            }
+            console.log(data)
+
+            formData.append('image', this.state.addImageFile)
+            formData.append('data', JSON.stringify(data))
+            console.log(formData)
+            Axios.post(API_URL + '/konfirmasi/addKonfirmasi', formData, headers)
+            .then((res)=>{
+                this.setState({kelasData: res.data, open: false, loading: false, openTerima: true})
+                console.log(this.state.kelasName)
+            }).catch((err)=>{
+                console.log(err)
+            })
+
+        }else{
+            alert('name kelas harus diisi!')
+        }
+    }
+
     handleClickOpen = () =>{
         this.setState({open: true})
     }
+    handleClickOpenTerima = () =>{
+        this.setState({openTerima: true})
+    }
+
 
     handleClose = () =>{
-        this.setState({open: false})
+        this.setState({open: false, openTerima: false})
     }
-    onRadioLevelChange = (event) => {
-        this.setState({level: event.target.value})
+    onRadioBankChange = (event) => {
+        this.setState({bank: event.target.value})
     }
+
     render(){
         if(!this.state.transData){
             return <LoadingPage/>
@@ -101,7 +167,7 @@ class Payment extends Component{
                     <div className='content'>
                         <div className='title '>
                             <h4>Invoive #{this.state.transData.invoice}</h4>
-                            <p>tanggal</p>
+                            <p>{this.state.transData.date}</p>
                         </div>
                         <div className='isi mt-2'>
                             <p>To : {this.state.transData.NamaUser}</p>
@@ -139,24 +205,27 @@ class Payment extends Component{
                     <DialogTitle id="form-dialog-title">Konfirmasi Pembayaran</DialogTitle>
                     <DialogContent>
                         <TextField autoFocus margin='dense' inputRef={el => this.name = el}  label="Nama Pemilik Rekening" type='text' fullWidth/>
-                        <TextField autoFocus margin='dense' inputRef={el => this.name = el}  label="Nomor Rekening" type='text' fullWidth/>
-                        <TextField autoFocus margin='dense' inputRef={el => this.name = el}  label="Nominal transfer" type='text' fullWidth/>
+                        <TextField autoFocus margin='dense' inputRef={rek => this.rek = rek}  label="Nomor Rekening" type='text' fullWidth/>
+                        <TextField autoFocus margin='dense' inputRef={nom => this.nominal = nom}  label="Nominal transfer" type='text' fullWidth/>
                         
                         <FormLabel component='legend' className='mt-4'>Bank</FormLabel>
-                        <RadioGroup aria-label='level' name='level' value={this.state.level}  onChange={this.onRadioLevelChange}>
-                            <FormControlLabel value='bca' control={<Radio color='primary'/>} label='Bank BCA'/>
-                            <FormControlLabel value='mandiri' control={<Radio color='primary'/>} label='Bank Mandiri'/>
+                        <RadioGroup aria-label='level' name='level' value={this.state.bank}  onChange={this.onRadioBankChange}>
+                            <FormControlLabel value='Bank BCA' control={<Radio color='primary'/>} label='Bank BCA'/>
+                            <FormControlLabel value='Bank Mandiri' control={<Radio color='primary'/>} label='Bank Mandiri'/>
                         </RadioGroup>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                            <DateTimePicker
-                                autoOk
-                                ampm={false}
-                                disableFuture
-                                value={this.state.selectedDate}
-                                onChange={this.handleDateChange}
-                                label="Tanggal transfer"
+                    
+                        <FormGroup>
+                            <Label for="exampleDatetime">Datetime</Label>
+                            <Input
+                                type="date"
+                                ref='date'
+                                innerRef='innerDate'
+                                onChange={()=>this.setState({date: this.refs.date.refs.innerDate.value})}
+                                name="datetime"
+                                id="exampleDatetime"
+                                placeholder="datetime placeholder"
                             />
-                        </MuiPickersUtilsProvider>
+                        </FormGroup>
                         <CustomInput type='file' id='kelasImage' className='mt-2'  label={this.state.addImageFileName} onChange={this.onAddImageFileChange}/>
                     </DialogContent>
                     <DialogActions>
@@ -164,7 +233,30 @@ class Payment extends Component{
                         Cancel
                     </Button>
                     <Button onClick={this.onBtnSaveClick} color="primary">
-                        Save
+                        {this.state.loading ? <Spinner color="warning" /> : 'Submit' }
+                    </Button>
+                    </DialogActions>
+                </Dialog>
+
+                {/* =================== dialog konfirmasi diterima =================== */}
+
+                <Dialog
+                    open={this.state.openTerima}
+                    TransitionComponent={TransitionTerima}
+                    keepMounted
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle id="alert-dialog-slide-title">{"Terima Kasih"}</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description">
+                        Bukti Pembayaran anda sudah kami terima.
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        Close
                     </Button>
                     </DialogActions>
                 </Dialog>
