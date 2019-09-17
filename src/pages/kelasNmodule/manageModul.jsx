@@ -2,18 +2,18 @@ import React, {Component} from 'react'
 import './styleKelas.css'
 import { 
     makeStyles,
-    Table, TableBody, TableCell, TableHead, TableRow, Input,
+    Table, TableBody, TableCell, TableHead, TableRow,
     Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
-    FormLabel, RadioGroup, FormControlLabel, Radio, DialogContentText
+     DialogContentText
     } from '@material-ui/core'
 import {EditOutlined, DeleteOutline} from '@material-ui/icons'
-import { CustomInput, Spinner } from 'reactstrap'
+import { Spinner } from 'reactstrap'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
 import { API_URL } from '../../helpers'
 import LoadingPage from '../loadingPage'
 import { Editor } from '@tinymce/tinymce-react'
-const numeral = require('numeral')
+// const numeral = require('numeral')
 
 
 const useStyles = makeStyles(theme => ({

@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Paper } from '@material-ui/core'
-import {Link, Redirect} from 'react-router-dom'
+// import { Paper } from '@material-ui/core'
+import {Redirect, Link} from 'react-router-dom'
 import Loading from '../loadingPage'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 import Axios from 'axios'
 import { transaction} from '../../redux/actions'
 import { API_URL} from '../../helpers'
@@ -16,7 +16,8 @@ class confirmation extends Component{
         loading : false
     }
     componentDidMount(){
-        let url = queryString.parse(this.props.location.search)
+        window.scrollTo(0,0)
+        // let url = queryString.parse(this.props.location.search)
     }
 
     onBayarBtnClick = () =>{
@@ -49,7 +50,7 @@ class confirmation extends Component{
 
             formData.append('data', JSON.stringify(data))
 
-            var a = JSON.stringify(data)
+            // var a = JSON.stringify(data)
             console.log(formData.getAll)
 
             Axios.post(`${API_URL}/transaction/addTransaction`, data, headers)
@@ -68,8 +69,36 @@ class confirmation extends Component{
    
     render(){
         console.log(this.props.selectedPaket)
+        if(!this.props.token){
+            return (
+                <section id='confirmPage'>
+                    <div className='container d-flex justify-content-center align-items-center flex-column flex-wrap'>
+                        <div className='confirm'>
+                            <center>
+                                <h2 style={{textAlign:'center'}}>Anda belum terdaftar</h2>
+                                <br></br>
+                                <div className='box1'>
+                                    <h4>Harap melakuakn pendaftaran terlebih dahulu dengan menekan tombol daftar dibawah</h4>
+                                    {/* <h3>{this.props.selectedPaket.durasi} Hari</h3>
+                                    <h1> Rp. {numeral(this.props.selectedPaket.harga).format('0,0')}</h1>
+                                    <span><i>*dengan menekan tombol lanjut pembayaran<br/> anda akan diarahkan ke halaman detail dan cara pembayaran</i></span> */}
+                                </div>
+                                {/* <Link to='/payment' style={{textDecoration:'none'}}> */}
+                                    <Link to='/register' style={{textDecoration:'none'}}>
+                                        <div className='bayar'>Daftar</div>
+                                    </Link>
+                                {/* </Link> */}
+                            </center>
+                        </div>
+                        <div className='cancel'>
+                            <p>sudah punya akun?  <a href='/login' style={{textDecoration:'none', color:'#858585'}}>Login</a></p>
+                        </div>
+                    </div>
+                </section>
+            )
+        }
         if(this.state.transData){
-            return <Redirect to={`/payment?i=${this.state.transData.idtransaction}`}/>
+            return (<Redirect to={`/payment?i=${this.state.transData.idtransaction}`}/>)
         }
         return(
             <section id='confirmPage'>
@@ -102,6 +131,7 @@ class confirmation extends Component{
 
 const mapStateToProps = ({paket, auth})=>{
     return{
+        token           : auth.token,
         paket           : paket.paket,
         selectedPaket   : paket.selectedPaket,
         userId          : auth.userId,

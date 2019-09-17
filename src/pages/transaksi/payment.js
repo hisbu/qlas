@@ -6,32 +6,32 @@ import { API_URL } from '../../helpers'
 import Bca from '../../supports/img/BCA_logo.svg'
 import Mandiri from '../../supports/img/Bank_Mandiri_logo.svg'
 import { 
-    makeStyles,
-    Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
+    // makeStyles,
+    Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide,
     FormLabel, RadioGroup, FormControlLabel, Radio, DialogContentText
     } from '@material-ui/core'
-import { DateTimePicker, MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers'
+// import { DateTimePicker, MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers'
 import { CustomInput, Spinner, FormGroup, Label, Input } from 'reactstrap'
-import DateFnsUtils from '@date-io/date-fns';
-import { format } from 'date-fns'
+// import DateFnsUtils from '@date-io/date-fns';
+// import { format } from 'date-fns'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
 import LoadingPage from '../loadingPage'
-import moment from 'moment'
+// import moment from 'moment'
 const numeral = require('numeral')
-const useStyles = makeStyles(theme => ({
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200,
-    },
-    dense: {
-      marginTop: 19,
-    },
-    menu: {
-      width: 200,
-    },
-  }));
+// const useStyles = makeStyles(theme => ({
+//     textField: {
+//       marginLeft: theme.spacing(1),
+//       marginRight: theme.spacing(1),
+//       width: 200,
+//     },
+//     dense: {
+//       marginTop: 19,
+//     },
+//     menu: {
+//       width: 200,
+//     },
+//   }));
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -160,7 +160,7 @@ class Payment extends Component{
         }
         console.log(this.state.selectedDate)
         console.log(this.props.transaksi)
-        const {textField, menu} = useStyles
+        // const {textField, menu} = useStyles
         return(
             <div id='paymentPage' className='paymentPage'>
                 <div className='container  mt-5 mb-5 d-flex justify-content-center align-items-center '>
@@ -180,12 +180,12 @@ class Payment extends Component{
                         <div className='bankContainer '>
                             <div className='row d-flex justify-content-center'>
                                 <div className='col-5 bank' style={{textAlign:'right', marginRight:'1em'}}>
-                                    <img src={Bca} width='100px'/>
+                                    <img src={Bca} width='100px' alt='bankbca'/>
                                     <p>89000987899</p>
                                     <p>a.n Ahmad Hisbullah</p>
                                 </div>
                                 <div className='col-5 bank' style={{textAlign:'left'}}>
-                                    <img src={Mandiri} width='100px'/>
+                                    <img src={Mandiri} width='100px' alt='bankmandiri'/>
                                     <p>89000987899</p>
                                     <p>a.n Ahmad Hisbullah</p>
                                 </div>

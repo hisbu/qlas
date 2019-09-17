@@ -53,6 +53,9 @@ class LoginForm extends Component{
 
     
     render(){
+        if(localStorage.getItem('token')){
+            return <Redirect to='/dashboard'/>
+        }
         if(this.props.username === ''){
             return(
                 <div className='loginForm '>

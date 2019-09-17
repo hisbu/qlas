@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 import './styleKelas.css'
 import { 
         makeStyles,
-        Table, TableBody, TableCell, TableHead, TableRow, Input,
+        Table, TableBody, TableCell, TableHead, TableRow, 
         Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
         FormLabel, RadioGroup, FormControlLabel, Radio
         } from '@material-ui/core'
-import {EditOutlined, DeleteOutline, Check, CancelOutlined} from '@material-ui/icons'
+import {EditOutlined, DeleteOutline} from '@material-ui/icons'
 import { CustomInput } from 'reactstrap'
 import Axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -104,8 +104,8 @@ class ManageKelas extends Component{
                         <TableCell><Link to={`/detail?id=${val.idKelas}`}>{val.kelasName}</Link></TableCell>
                         <TableCell>{val.category}</TableCell>
                         <TableCell className='fontCell'><div dangerouslySetInnerHTML={{ __html:val.description? val.description.split(' ').splice(0,8).join(' '): null}}/></TableCell>
-                        <TableCell>{val.kelasDuration} days</TableCell>
-                        <TableCell>Rp. {numeral(val.price).format('0,0')}</TableCell>
+                        {/* <TableCell>{val.kelasDuration} days</TableCell>
+                        <TableCell>Rp. {numeral(val.price).format('0,0')}</TableCell> */}
                         <TableCell>{val.level}</TableCell>
                         <TableCell>{val.penyusun}</TableCell>
                         <TableCell><img src={`${API_URL}${val.image}`} alt={val.kelasName} height='75px'/></TableCell>
@@ -265,7 +265,7 @@ class ManageKelas extends Component{
             return <LoadingPage/>
         }
         return(
-            <div id='manageKelas' className='manageKelas container'>
+            <div id='manageKelas' className='manageKelas container' style={{overflow:'scroll'}}>
                 <div>
                     <h1>manage kelas</h1>
                 </div>
@@ -327,19 +327,19 @@ class ManageKelas extends Component{
 
                 {/* ============== TABLE DATA KELAS ============== */}
                 <div className='dataContainer row'>
-                    <Table>
+                    <Table width='100%'>
                         <TableHead>
                             <TableRow>
-                                <TableCell style={{width:'10%'}}>No</TableCell>
-                                <TableCell>Kelas Name</TableCell>
-                                <TableCell>Category</TableCell>
-                                <TableCell>Descriptioin</TableCell>
-                                <TableCell>Kelas Duration</TableCell>
-                                <TableCell>Price</TableCell>
-                                <TableCell>Level</TableCell>
-                                <TableCell>Penyusun</TableCell>
-                                <TableCell>Image</TableCell>
-                                <TableCell colSpan='2'>Action</TableCell>
+                                <TableCell style={{width:'5%'}}>No</TableCell>
+                                <TableCell style={{width:'25%'}}>Kelas Name</TableCell>
+                                <TableCell style={{width:'10%'}}>Category</TableCell>
+                                <TableCell style={{width:'20%'}}>Descriptioin</TableCell>
+                                {/* <TableCell>Kelas Duration</TableCell>
+                                <TableCell>Price</TableCell> */}
+                                <TableCell style={{width:'10%'}}>Level</TableCell>
+                                <TableCell style={{width:'10%'}}>Penyusun</TableCell>
+                                <TableCell style={{width:'10%'}}>Image</TableCell>
+                                <TableCell  style={{width:'10%'}}>Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

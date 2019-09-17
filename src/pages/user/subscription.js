@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Paper } from '@material-ui/core'
-import {Link, Redirect} from 'react-router-dom'
+// import { Paper } from '@material-ui/core'
+// import {Link, Redirect} from 'react-router-dom'
 import Loading from '../loadingPage'
-import queryString from 'query-string'
-import { transaction} from '../../redux/actions'
+// import queryString from 'query-string'
+// import { transaction} from '../../redux/actions'
 import { API_URL} from '../../helpers'
 import moment from 'moment'
 import Axios from 'axios'
 
-const numeral = require('numeral')
+// const numeral = require('numeral')
 var now = moment().format("YYYY-MM-DD h:mm:ss")
 
 class Subscription extends Component{
@@ -19,7 +19,7 @@ class Subscription extends Component{
     }
 
     componentDidMount(){
-        let url = queryString.parse(this.props.location.search)
+        // let url = queryString.parse(this.props.location.search)
 
         Axios.get(`${API_URL}/langganan/getLangganan?userId=${this.props.userId}`)
         .then((res)=>{
@@ -34,9 +34,9 @@ class Subscription extends Component{
     }
 
     renderData=()=>{
-        var awal = this.state.subscriptionData.awalLangganan
-        var akhir = this.state.subscriptionData.akhirLangganan
-        var sekarang = moment().format("YYYY-MM-DD h:mm:ss")
+        // var awal = this.state.subscriptionData.awalLangganan
+        // var akhir = this.state.subscriptionData.akhirLangganan
+        // var sekarang = moment().format("YYYY-MM-DD h:mm:ss")
 
         var hasil = moment.duration(2, 'days')
 

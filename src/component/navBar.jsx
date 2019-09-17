@@ -21,6 +21,7 @@ import { makeStyles, Avatar } from '@material-ui/core'
   import { connect } from 'react-redux'
   import TopMenu from './topMenu'
   import { onUserLogout } from '../redux/actions/authActions'
+  import { API_URL} from '../helpers'
 
   const useStyle = makeStyles({
     bigAvatar:{
@@ -55,6 +56,7 @@ class Example extends React.Component {
     this.props.onUserLogout()
   }
   render() {
+    console.log('profile image ===========>',this.props.image)
     const {bigAvatar} = useStyle
     if(this.props.position==='landing'){
         return (
@@ -81,7 +83,7 @@ class Example extends React.Component {
                         ? 
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav >
-                                <Avatar alt='hisbu' src={qian} style={bigAvatar}/>
+                                <Avatar alt='hisbu' src={`${API_URL}${this.props.image}`} style={bigAvatar}/>
                             </DropdownToggle>
                             <DropdownMenu right>
                             <DropdownItem>
@@ -149,7 +151,7 @@ class Example extends React.Component {
                         ? 
                         <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav >
-                                <Avatar alt='hisbu' src={qian} style={bigAvatar}/>
+                                <Avatar alt='hisbu' src={`${API_URL}${this.props.image}`} style={bigAvatar}/>
                             </DropdownToggle>
                             <DropdownMenu right>
                             <DropdownItem>

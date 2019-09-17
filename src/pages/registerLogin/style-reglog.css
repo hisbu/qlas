@@ -80,6 +80,8 @@
   .signupMsg .title{
     font-weight: 300;
     font-size: 23px;
+    background-color: transparent;
+    padding: 0 1em;
   }
   
   .loginMsg p,

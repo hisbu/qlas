@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import { 
-    makeStyles,
-    Table, TableBody, TableCell, TableHead, TableRow, Input,
-    Button, TextField , Dialog, DialogActions, DialogContent, DialogTitle, Slide, MenuItem,
-    FormLabel, RadioGroup, FormControlLabel, Radio, DialogContentText
+    Table, TableBody, TableCell, TableHead, TableRow,
+    Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide,
+     DialogContentText
     } from '@material-ui/core'
-import {EditOutlined, Close, Check, CancelOutlined} from '@material-ui/icons'
+import { Close, Check} from '@material-ui/icons'
 import Axios from 'axios'
 import {API_URL} from '../../helpers'
 import LoadingPage from '../loadingPage'
@@ -78,11 +77,11 @@ class ManageKonfirmasi extends Component{
     onBtnKonfirmasiClick=(id)=>{
         const token     = localStorage.getItem('token')
         console.log(token)
-            var headers = {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            }
+            // var headers = {
+            //     headers: {
+            //         'Authorization': `Bearer ${token}`
+            //     }
+            // }
         Axios.put(`${API_URL}/konfirmasi/konfirmasi/${id}`)
         .then((res)=>{
             console.log(res.data)

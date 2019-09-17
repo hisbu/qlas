@@ -38,7 +38,7 @@ class LandingPage extends Component{
 
     renderKelasData = () => {
         // var kelasData = this.props.kelas
-        return this.state.kelasData.slice(0,4).map((item)=>{
+        return this.state.kelasData.reverse().slice(0,4).map((item)=>{
             return (
                 <div className='col-md-6 mt-4 '>
                     <CardCatalogue titleCard={item.kelasName} imageCard={`${API_URL}${item.image}`} kelasId={`/detail?id=${item.idKelas}`}/>
@@ -81,10 +81,10 @@ class LandingPage extends Component{
                         <div className='arrow_box'>
                             <div className='arrow_container '>
                                 <div className='align-self-end' >
-                                    <div class="container_arrow">
-                                        <div class="chevron"></div>
-                                        <div class="chevron"></div>
-                                        <div class="chevron"></div>
+                                    <div className="container_arrow">
+                                        <div className="chevron"></div>
+                                        <div className="chevron"></div>
+                                        <div className="chevron"></div>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +165,11 @@ class LandingPage extends Component{
                             </div>
                             
                         </div>
-                        <center className='mbottom mt-5'><BtnBgQcolor title={'Lihat kelas lengkap'}/></center>
+                        <center className='mbottom mt-5'>
+                            <a href='/listkelas' style={{textDecoration:'none'}}>
+                                <BtnBgQcolor title={'Lihat kelas lengkap'}/>
+                            </a>
+                        </center>
                     </div>
                 </section>
 

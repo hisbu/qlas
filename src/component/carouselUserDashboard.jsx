@@ -32,10 +32,10 @@ class ReactSlickDemo extends React.Component {
       autoplay: true,
       autoplaySpeed: 2600,
       beforeChange: function(currentSlide, nextSlide) {
-        console.log("before change", currentSlide, nextSlide);
+        // console.log("before change", currentSlide, nextSlide);
       },
       afterChange: function(currentSlide) {
-        console.log("after change", currentSlide);
+        // console.log("after change", currentSlide);
       }
     };
     const { style } = this.props;

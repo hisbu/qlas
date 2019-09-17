@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { keepLogin, kelasInit, paketInit } from './redux/actions'
 import Axios from 'axios'
 import { API_URL } from './helpers'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 // page
 import LandingPage from './pages/landingPage'
 // import Landing from './pages/landing.js'
@@ -27,14 +27,16 @@ import ConfirmPage from './pages/transaksi/konfirmasi'
 import ManageKonfirmasi from './pages/Admin/manageKonfirmasi'
 import Subscription from './pages/user/subscription'
 import ManageModul from './pages/kelasNmodule/manageModul'
-
+import DetailModul from './pages/materi/detailModul'
+import ListKelas from './pages/kelasNmodule/listKelas'
+import HomeAdmin from './pages/Admin/dashboardAdmin'
 class App extends Component{
   state = {
       kelasData:''
   }
   componentDidMount(){
     this.props.keepLogin()
-    var id = window.location.href
+    // var id = window.location.href
     // var test = this.props.match.params.kelasId
     // let url = this.props.location.pathname;
     // let params = queryString.parse(url);
@@ -84,6 +86,9 @@ class App extends Component{
           <Route path='/confirmation' component={ConfirmPage}/>
           <Route path='/manageKonf' component={ManageKonfirmasi}/>
           <Route path='/manageModul' component={ManageModul}/>
+          <Route path='/detailModul' component={DetailModul}/>
+          <Route path='/listkelas' component={ListKelas}/>
+          <Route path='/admin' component={HomeAdmin}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>

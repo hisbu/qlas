@@ -3,14 +3,16 @@ import { Route, Link, Redirect } from 'react-router-dom'
 import { connect} from 'react-redux'
 import { pagePosition} from './../../redux/actions'
 import './style.css'
-// import Logo from '../../supports/img/logo1.png'
-// import TopMenu from '../../component/topMenu'
 import TestPage from './../../pages/test'
-// import Carousel from './../../component/carouselUserDashboard'
 import HomeUser from './homeUser'
 import LoadingPage from './../loadingPage'
 import ProfilePage from './profile'
 import Subscription from './subscription'
+import ListKelas from '../kelasNmodule/listKelas'
+import ManageKelas from '../kelasNmodule/manageKelas'
+import ManageModul from '../kelasNmodule/manageModul'
+import ManageKonfirmasi from '../Admin/manageKonfirmasi'
+
 
 class DashboardUser extends Component{
 
@@ -19,6 +21,7 @@ class DashboardUser extends Component{
     this.props.pagePosition(position)
     console.log(position)
     console.log(this.props.authChecked)
+    console.log(this.props.roleId)
   }
 
   render(){
@@ -32,6 +35,14 @@ class DashboardUser extends Component{
                 <div className='sideMenuItem'>
                   <Link to='/dashboard'><span>Home</span></Link>
                   <Link to='/dashboard/subscription'><span>Subscription</span></Link>
+                  <Link to='/dashboard/listkelas'><span>Daftar Kelas</span></Link>
+                  { this.props.roleId != 3 ?
+                  <section>
+                    <Link to='/dashboard/manageKelas'><span>Manage Kelas</span></Link>
+                    <Link to='/dashboard/manageModul'><span>Manage Modul</span></Link>
+                    <Link to='/dashboard/manageKonfirmasi'><span>Manage Konfirmasi Pembayaran</span></Link>
+                  </section> 
+                  : null }
                 </div>
               </div>
               {/* ============ START CONTENT CONTAINER ============ */}
@@ -41,6 +52,10 @@ class DashboardUser extends Component{
                     <Route path='/dashboard/test' component={TestPage}/>
                     <Route path='/dashboard/profilePage' component={ProfilePage}/>
                     <Route path='/dashboard/subscription' component={Subscription}/>
+                    <Route path='/dashboard/listkelas' component={ListKelas}/>
+                    <Route path='/dashboard/manageKelas' component={ManageKelas}/>
+                    <Route path='/dashboard/manageModul' component={ManageModul}/>
+                    <Route path='/dashboard/manageKonfirmasi' component={ManageKonfirmasi}/>
                 </div>  
               </div>
             </div>
@@ -59,7 +74,8 @@ const mapStateToProps = (state)=>{
   return {
       position    : state.page,
       token       : state.auth.token, 
-      authChecked : state.auth.authChecked
+      authChecked : state.auth.authChecked,
+      roleId      : state.auth.roleId
   }
 }
 
