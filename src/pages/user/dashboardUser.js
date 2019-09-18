@@ -12,7 +12,10 @@ import ListKelas from '../kelasNmodule/listKelas'
 import ManageKelas from '../kelasNmodule/manageKelas'
 import ManageModul from '../kelasNmodule/manageModul'
 import ManageKonfirmasi from '../Admin/manageKonfirmasi'
-
+import DetailModul from '../materi/detailModul'
+import Kelasku from './kelasKu'
+import ManageTransaksi from '../Admin/manageTransaksi'
+import ManageUser from '../Admin/manageUser'
 
 class DashboardUser extends Component{
 
@@ -36,11 +39,14 @@ class DashboardUser extends Component{
                   <Link to='/dashboard'><span>Home</span></Link>
                   <Link to='/dashboard/subscription'><span>Subscription</span></Link>
                   <Link to='/dashboard/listkelas'><span>Daftar Kelas</span></Link>
+                  <Link to='/dashboard/kelasku'><span>Kelas Ku</span></Link>
                   { this.props.roleId != 3 ?
                   <section>
                     <Link to='/dashboard/manageKelas'><span>Manage Kelas</span></Link>
                     <Link to='/dashboard/manageModul'><span>Manage Modul</span></Link>
+                    <Link to='/dashboard/manageTransaksi'><span>Manage Transaksi</span></Link>
                     <Link to='/dashboard/manageKonfirmasi'><span>Manage Konfirmasi Pembayaran</span></Link>
+                    <Link to='/dashboard/manageUser'><span>Manage User</span></Link>
                   </section> 
                   : null }
                 </div>
@@ -56,6 +62,10 @@ class DashboardUser extends Component{
                     <Route path='/dashboard/manageKelas' component={ManageKelas}/>
                     <Route path='/dashboard/manageModul' component={ManageModul}/>
                     <Route path='/dashboard/manageKonfirmasi' component={ManageKonfirmasi}/>
+                    <Route path='/dashboard/kelasku' component={Kelasku}/>
+                    <Route path='/dashboard/detailModul' component={DetailModul}/>
+                    <Route path='/dashboard/manageTransaksi' component={ManageTransaksi}/>
+                    <Route path='/dashboard/manageUser' component={ManageUser}/>
                 </div>  
               </div>
             </div>

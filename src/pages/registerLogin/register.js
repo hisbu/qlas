@@ -3,13 +3,15 @@ import React, {Component} from 'react'
 import './style-reglog.css'
 // import {BtnBgQcolor} from '../../component/btnQlas'
 import { Redirect, Link } from 'react-router-dom'
+import { Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
 import { onUserRegister } from '../../redux/actions'
 
 
 class LoginForm extends Component{
     state={
-        open : false
+        open : false,
+        loading: false
     }
     onBtnRegisterClick = () => {
         var username = this.refs.username.value;
@@ -17,6 +19,7 @@ class LoginForm extends Component{
         var password = this.refs.password.value;
 
         this.props.onUserRegister({ username, email, password });
+        this.setState({loading: true})
     }
 
     renderError = () => {
@@ -27,10 +30,10 @@ class LoginForm extends Component{
     }
 
     renderButton = () => {
-        if(this.props.loading) {
-            return <i className="fa fa-spinner fa-spin" style={{ fontSize: '54px' }}/>
-        }
-        return <button  name="submit" id="submit"  value="Sign Up" onClick={this.onBtnRegisterClick} >Sign Up</button>
+        // if(this.state.loading) {
+        //     return <i className="fa fa-spinner fa-spin" style={{ fontSize: '54px' }}/>
+        // }
+        return <button  name="submit" id="submit"  value="Sign Up" onClick={this.onBtnRegisterClick} >{ this.state.loading ? <Spinner/> : 'Sign Up'}</button>
     }
 
     componentDidMount(){

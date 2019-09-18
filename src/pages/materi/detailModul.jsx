@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './style.css'
+import { CheckCircleOutline} from '@material-ui/icons'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import queryString from 'query-string'
@@ -11,7 +12,8 @@ class DetailModul extends Component{
     state={
         modulData:'',
         selectedModul: null,
-        url: ''
+        url: '',
+        belajar: ''
 
     }
 
@@ -30,10 +32,50 @@ class DetailModul extends Component{
 
     renderList=()=>{
         let data = this.state.modulData
+        let belajar = this.state.belajar ? this.state.belajar : this.props.belajar
         return data.map((val)=>{
+            let status = ''
+            belajar.map((item) =>{
+                if(val.idmodul === item.modulId){
+                    return status = 'taken'
+                }
+            })
+            if(status){
+                return(
+                    <li onClick={()=> this.setState({selectedModul: val.idmodul})} style={{color: '#3f51b5', fontWeight:'bold'}}>
+                        <CheckCircleOutline color='primary'/> {val.title}
+                    </li>
+                )    
+            }
             return(
-                <li onClick={()=> this.setState({selectedModul: val.idmodul})}>{val.title}</li>
+                <li onClick={()=>this.lanjutBtnClick(val.idmodul)}>{val.title}</li>
             )
+        })
+    }
+
+    lanjutBtnClick=(idmodul)=>{
+        this.setState({selectedModul: idmodul})
+        const token     = localStorage.getItem('token')
+        var headers = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        let data = {
+            modulId : idmodul,
+            userId : this.props.userId
+        }
+        Axios.post(`${API_URL}/belajar/addBelajar`, data, headers)
+        .then((res)=>{
+            console.log(res)
+            Axios.get(`${API_URL}/belajar/getBelajar?iduser=${this.props.userId}`)
+            .then((res)=>{
+                this.setState({belajar: res.data})
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }).catch((err)=>{
+            console.log(err)
         })
     }
 
@@ -99,7 +141,9 @@ class DetailModul extends Component{
 
 const mapsStateToProps = ({auth})=>{
     return{
-        token   : auth.token
+        token   : auth.token,
+        belajar : auth.belajar,
+        userId  : auth.userId
     }
 }
 

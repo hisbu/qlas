@@ -22,6 +22,7 @@ class LandingPage extends Component{
     }
 
     componentDidMount(){
+        window.scrollTo(0,0)
         this.props.pagePosition(this.state.location)
         console.log(this.props.pageLocation)
         console.log(this.state.location)
@@ -71,9 +72,9 @@ class LandingPage extends Component{
                                 Jadilah tuan rumah di negeri sendiri dengan belajar langsung dari para inovator dan developer expert
                                 </div>
                                 <div className='jb_btn'>
-                                    <Link to='/register' style={{textDecoration:'none'}}>
-                                        <BtnBgQcolor title={'Daftar Gratis Sekarang'}/>
-                                    </Link>
+                                    <a href='/subscribe' style={{textDecoration:'none'}}>
+                                        <BtnBgQcolor title={'Langganan Sekarang'}/>
+                                    </a>
                                 </div>
                             </div>
                         </div>

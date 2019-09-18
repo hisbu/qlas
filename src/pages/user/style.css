@@ -255,3 +255,72 @@
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+/* =========== KELAS KU ================ */
+.kelasKuPage{
+    background-color: #dadada;
+}
+.box-1{
+    border-radius: 0.5em;
+    padding: 1em;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box-2{
+    width: 30%;
+    height: 150px;
+    margin-left: -2em;
+    border-radius: 0.5em;
+    margin-right: 1em;
+    /* background-color: rgb(255, 116, 116); */
+    transition: 0.3s;
+}
+
+.box-2:hover{
+    margin-left: -3em;
+    margin-right: 2em;
+}
+
+.box-2 img{
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.5em;
+}
+
+.box-3{
+    width: 64%;
+    /* border: 1px solid black; */
+}
+
+.box-4{
+    width: 8%;
+    cursor: pointer;
+   overflow: hidden;
+}
+
+.box-4{
+    transition: 0.2s;
+}
+
+.box-4:hover{
+    margin-top: -1em;
+}
+
+.judulKelas{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.jmlModul{
+    margin-bottom: 0;
+}
+.progressKelas{
+    width: 90%;
+}
+

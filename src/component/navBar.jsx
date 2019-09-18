@@ -47,16 +47,16 @@ class Example extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.position)
-    console.log(this.props.username)
-    console.log('profile image ===========>',this.props.image)
+    // console.log(this.props.position)
+    // console.log(this.props.username)
+    // console.log('profile image ===========>',this.props.image)
   }
 
   onBtnLogOutClick = () =>{
     this.props.onUserLogout()
   }
   render() {
-    console.log('profile image ===========>',this.props.image)
+    console.log('posisition page ===========>',this.props.position)
     const {bigAvatar} = useStyle
     if(this.props.position==='landing'){
         return (

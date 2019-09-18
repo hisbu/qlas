@@ -19,6 +19,7 @@ class DetailQelas extends Component{
     state = {
         kelasDetail:'',
         langganan:'',
+        kelasku:'',
         userId :this.props.userId
     }
 
@@ -100,26 +101,36 @@ class DetailQelas extends Component{
         Axios.post(`${API_URL}/kelasku/addKelasku`, data, headers)
         .then((res)=>{
             // console.log(res.data)
+            Axios.get(`${API_URL}/kelasku/getKelasku?userId=${this.props.userId}`)
+            .then((res) => {
+                this.setState({kelasku: res.data})
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }).catch((err)=>{
+            console.log(err)
         })
     }
     
     renderBuybutton=()=>{
         let url = queryString.parse(this.props.location.search)
+        let kelasku = this.state.kelasku ? this.state.kelasku : this.props.kelasKu
+        console.log(this.props.auth)
         if(this.props.langganan){
-            let kelasku = ''
-            if(this.props.kelasKu){
-                this.props.kelasKu.map((val)=>{
+            let adaKelasku = ''
+            // if(this.props.kelasKu){
+                kelasku.map((val)=>{
                     console.log(val.kelasId === parseInt(url.id))
                     if(val.kelasId === parseInt(url.id)){
-                        kelasku = 'taken'
+                        adaKelasku = 'taken'
                     }
                 })
-            }
-            if(kelasku){
+            // }
+            if(adaKelasku){
                 return (
                     <section id='sectionBuy' className='sectionBuy'>
                         <div className='contentBuySection'> Anda sudah mengambil kelas ini, silahkan lanjutkan belajar</div>
-                        <Link to={`/detailModul?kelasId=${url.id}`} style={{ textDecoration: 'none' }}>
+                        <Link to={`/dashboard/detailModul?kelasId=${url.id}`} style={{ textDecoration: 'none' }}>
                             <div className='buyBotton'>Lanjut Belajar</div>
                         </Link>
                     </section>
@@ -211,7 +222,7 @@ class DetailQelas extends Component{
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
-                                <MateriPage idKelas={this.state.kelasDetail.idKelas} langgalan='mana'/>
+                                <MateriPage idKelas={this.state.kelasDetail.idKelas}/>
                             </TabPane>
                             <TabPane tabId="3">
                                 <h2>tab 3</h2>
@@ -236,7 +247,8 @@ const mapStateToProps = (state)=>{
         kelas       : state.kelas.kelasData,
         userId      : state.auth.userId,
         langganan   : state.auth.langganan,
-        kelasKu     : state.auth.kelasku
+        kelasKu     : state.auth.kelasku,
+        auth        : state.auth
     }
 }
 

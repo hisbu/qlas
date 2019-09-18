@@ -5,16 +5,20 @@ import './style-reglog.css'
 import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { onUserLogin } from '../../redux/actions'
+import {Spinner} from 'reactstrap'
 
 
 class LoginForm extends Component{
+    state={
+        loading :false
+    }
     
     onBtnLoginClick = () => {
         var email = this.refs.email.value
         var password = this.refs.password.value
 
         this.props.onUserLogin({ email, password})
-
+        this.setState({loading: true})
     }
 
     renderError = () => {
@@ -24,10 +28,7 @@ class LoginForm extends Component{
     }
 
     renderButton = () => {
-        if(this.props.loading) {
-            return <i className="fa fa-spinner fa-spin" style={{ fontSize: '54px' }}/>
-        }
-        return <button  name="submit" id="submit"  value="Login" onClick={this.onBtnLoginClick} >Login</button>
+        return <button  name="submit" id="submit"  value="Login" onClick={this.onBtnLoginClick} >{ this.state.loading ? <Spinner size='sm'/> : 'Login'}</button>
     }
 
     componentDidMount(){
@@ -68,7 +69,7 @@ class LoginForm extends Component{
                             <input ref='email' type="text" name="email" placeholder="EMAIL" className='paddingInput' />
                             <input ref='password' type="password" name="password" placeholder="PASSWORD" className='paddingInput'/>
                             </div>
-                            <p>FORGET PASSWORD?</p>
+                            {/* <p>FORGET PASSWORD?</p> */}
                             {this.renderError()}
                             {this.renderButton()}
                             {/* <button>LOG IN</button> */}

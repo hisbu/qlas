@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import { makeStyles, Table, TableBody, TableCell, TableHead, TableRow,  Fab } from '@material-ui/core'
+import { CheckCircleOutline } from '@material-ui/icons'
 import './style.css'
 import Axios from 'axios'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {pagePosition } from '../../redux/actions'
+import { Link, Redirect } from 'react-router-dom'
 import queryString from 'query-string'
 import { API_URL } from '../../helpers'
 import LoadingPage from '../loadingPage'
@@ -16,6 +18,8 @@ class MateriPage extends Component{
 
     componentDidMount(){
         window.scrollTo(0,0)
+        var position = window.location.href.split('/')[3]
+        this.props.pagePosition(position)
 
         let url = queryString.parse(this.props)
         // let link = queryString.parse(this.props)
@@ -25,13 +29,6 @@ class MateriPage extends Component{
         .then((res)=>{
             // console.log(res.data)
             this.setState({modulKelasData: res.data})
-                Axios.get(`${API_URL}/belajar/getBelajar?idkelas=${res.data.idkelas} && iduser=${this.props.userId}`)
-                .then((res)=>{
-                    // console.log(res.data)
-                    this.setState({openModul: res.data})
-                }).catch((err)=>{
-                    console.log(err)
-                })
         }).catch((err)=>{
             console.log(err)
         })
@@ -53,17 +50,36 @@ class MateriPage extends Component{
     renderData=()=>{
         // console.log(this.state.openModul)
         // console.log(this.props.kelasid)
-        // console.log(this.props.userId)
+        console.log(this.props.belajar)
         // console.log(this.state.modulKelasData)
         var data = this.state.modulKelasData
+        var dataModul = this.props.belajar
         return data.map((val, i)=>{
+            let status = ''
+            dataModul.map((item)=>{
+                if(val.idmodul === item.modulId){
+                    return status = 'taken'
+                }   
+            })
+            if(status){
+                return(
+                    <TableRow className='modulList'>
+                        <TableCell>{val.title}</TableCell>
+                        <TableCell >
+                            <Link to={`/dashboard/detailModul?kelasId=${val.idkelas}&idmodul=${val.idmodul}`} style={{textDecoration:'none', color: '#000'}}>
+                                <p className='lanjut' style={{color: '#3f51b5', fontWeight:'bold'}}><CheckCircleOutline color='primary'/>Selesai</p>
+                            </Link>
+                        </TableCell>
+                    </TableRow>
+                )    
+            }
             return(
                 <TableRow className='modulList'>
                     <TableCell>{val.title}</TableCell>
                     <TableCell >
-                        {this.props.userId.langganan ? 
-                        <Link to={`/detailModul?kelasId=${val.idkelas}&idmodul=${val.idmodul}`} style={{textDecoration:'none', color: '#000'}}>
-                            <p className='lanjut'>Lanjut belajar</p>
+                        {this.props.langganan ? 
+                        <Link to={`/dashboard/detailModul?kelasId=${val.idkelas}&idmodul=${val.idmodul}`} style={{textDecoration:'none', color: '#000'}}>
+                            <p className='lanjut' onClick={()=>this.lanjutBtnClick(val.idmodul)}>Lanjut belajar</p>
                         </Link>
                         : <p className='lanjut'>Lanjut belajar</p> }
                     </TableCell>
@@ -72,14 +88,33 @@ class MateriPage extends Component{
         })
     }
 
+    lanjutBtnClick=(idmodul)=>{
+        const token     = localStorage.getItem('token')
+        var headers = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        let data = {
+            modulId : idmodul,
+            userId : this.props.userId
+        }
+        Axios.post(`${API_URL}/belajar/addBelajar`, data, headers)
+        .then((res)=>{
+            console.log(res)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+
     render(){
         
         if(!this.state.modulKelasData){
             return <LoadingPage/>
         }
-        // if(!this.props.userId){
-        //     return <LoadingPage/>
-        // }
+        if(!this.props.belajar){
+            return <LoadingPage/>
+        }
         // if(!this.props.kelasId){
         //     return <LoadingPage/>
         // }
@@ -89,7 +124,6 @@ class MateriPage extends Component{
                     <div className='row'>
                         <div className='col-12 materiContainer '>
                             <p>Daftar Modul</p>
-                            {this.props.langganan}
                             <Table>
                                 <TableHead>
                                     <TableCell style={{width:'80%'}}>Modul</TableCell>
@@ -112,8 +146,10 @@ class MateriPage extends Component{
 
 const mapsStateToProps = ({auth})=>{
     return{
-        userId : auth
+        userId : auth.userId,
+        belajar : auth.belajar,
+        langganan : auth.langganan
     }
 }
 
-export default connect(mapsStateToProps) (MateriPage);
+export default connect(mapsStateToProps, {pagePosition}) (MateriPage);

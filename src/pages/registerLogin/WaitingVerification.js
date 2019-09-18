@@ -27,10 +27,10 @@ class WaitingVerification extends Component {
                         Bila anda tidak mendapatkan email dari Penguasa Instagrin
                         harap cemas, dan click button dibawah untuk Resend
                     </p>
-                    <div>
+                    {/* <div>
                         <BtnBgWhite title={'Resend email'} onClick={this.onBtnResendEmailClick}/> 
 
-                    </div>
+                    </div> */}
                     <input type="button" value="Resend Email" onClick={this.onBtnResendEmailClick} />
                     
                 </div>

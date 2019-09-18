@@ -12,6 +12,7 @@ import {
     } from '@material-ui/core'
 // import { DateTimePicker, MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers'
 import { CustomInput, Spinner, FormGroup, Label, Input } from 'reactstrap'
+import { Redirect } from 'react-router-dom'
 // import DateFnsUtils from '@date-io/date-fns';
 // import { format } from 'date-fns'
 import { connect } from 'react-redux'
@@ -52,7 +53,8 @@ class Payment extends Component{
         transData           :'',
         bank                :'',
         loading             : false,
-        date                : ''
+        date                : '',
+        selesai             : false
     }
 
     componentDidMount(){
@@ -69,7 +71,10 @@ class Payment extends Component{
     componentDidUpdate(){
         // console.log(this.props.selectedPaket)
         // console.log(this.props.userId)
-        console.log(this.state.date)
+        // console.log(this.state.date)
+        if(this.state.selesai){
+            return (<Redirect to='/dashboard'/>)
+        }
         
     }
 
@@ -128,8 +133,9 @@ class Payment extends Component{
             console.log(formData)
             Axios.post(API_URL + '/konfirmasi/addKonfirmasi', formData, headers)
             .then((res)=>{
-                this.setState({kelasData: res.data, open: false, loading: false, openTerima: true})
+                this.setState({kelasData: res.data, open: false, loading: false, openTerima: true, selesai: true})
                 console.log(this.state.kelasName)
+                
             }).catch((err)=>{
                 console.log(err)
             })

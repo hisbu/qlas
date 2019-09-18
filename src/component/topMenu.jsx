@@ -72,16 +72,16 @@ class TopMenu extends Component{
                             <Nav className="ml-auto" navbar>
                             <NavItem className=' menuItem '>
                                 <NavLink href="/components/">
-                                    <Badge className={margin} color='primari' variant='dot'>
+                                    {/* <Badge className={margin} color='primari' variant='dot'>
                                         <NotificationsNone/>
-                                    </Badge>
+                                    </Badge> */}
                                 </NavLink>
                             </NavItem>
                             <NavItem className=' menuItem '>
                                 <NavLink href="/components/">
-                                    <Badge className={margin} color='primari' variant='dot'>
+                                    {/* <Badge className={margin} color='primari' variant='dot'>
                                         <MailOutlineRounded/>
-                                    </Badge>
+                                    </Badge> */}
                                 </NavLink>
                             </NavItem>
                             <NavItem className=' menuItem '>
@@ -98,9 +98,9 @@ class TopMenu extends Component{
                                         Profile
                                         </DropdownItem>                                    
                                     </Link>
-                                    <DropdownItem>
+                                    {/* <DropdownItem>
                                         Option 2
-                                    </DropdownItem>
+                                    </DropdownItem> */}
                                     <DropdownItem divider />
                                     <DropdownItem onClick={this.onBtnLogOutClick}>
                                         {/* <Redirect to='/'> */}

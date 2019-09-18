@@ -30,6 +30,9 @@ import ManageModul from './pages/kelasNmodule/manageModul'
 import DetailModul from './pages/materi/detailModul'
 import ListKelas from './pages/kelasNmodule/listKelas'
 import HomeAdmin from './pages/Admin/dashboardAdmin'
+import Kelasku from './pages/user/kelasKu'
+import ManageTransaksi from './pages/Admin/manageTransaksi'
+import ManageUser from './pages/Admin/manageUser'
 class App extends Component{
   state = {
       kelasData:''
@@ -89,6 +92,11 @@ class App extends Component{
           <Route path='/detailModul' component={DetailModul}/>
           <Route path='/listkelas' component={ListKelas}/>
           <Route path='/admin' component={HomeAdmin}/>
+          <Route path='/kelasku' component={Kelasku}/>
+          <Route path='/dashboard/kelasku' component={Kelasku}/>
+          <Route path='/dashboard/detaiilModul' component={DetailModul}/>
+          <Route path='/dashboard/manageTransaksi' component={ManageTransaksi}/>
+          <Route path='/dashboard/manageUser' component={ManageUser}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>
