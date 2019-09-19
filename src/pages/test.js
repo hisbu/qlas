@@ -1,40 +1,40 @@
-// // import React, {Component} from 'react';
-// // import Carousel from './../component/carouselUserDashboard'
-// // import Discus from 'disqus-react'
-// // import Disqus from 'disqus-react';
+import React, {Component} from 'react';
+import Carousel from './../component/carouselUserDashboard'
+import Discus from 'disqus-react'
+import Disqus from 'disqus-react';
 
-// // class test extends Component{
-// //   render(){
-// //     const disqusShortname = "qelas"
-// //     const discusConfig = {
-// //       url : "http://localhost:3000",
-// //       identifier  : 'article_id',
-// //       title       : 'Title article'
-// //     }
+class test extends Component{
+  render(){
+    const disqusShortname = "qelas"
+    const discusConfig = {
+      url : "http://localhost:3000",
+      identifier  : 'article_id',
+      title       : 'Title article'
+    }
 
-// //     return(
-// //       <div className='container'>
-// //         <div className='col-6'>
-// //           {/* <Carousel/> */}
-// //         <h1>test page</h1>
-// //         <Disqus.DiscussionEmbed
-// //           shortname={disqusShortname}
-// //           config={discusConfig}
-// //           />
-// //           {/* <div className='boks'></div>
-// //           <div className='boks' style={{borderRadius:'18px'}}></div>
-// //           <div className='boks'></div>
-// //           <div className='boks'></div>
-// //           <div className='boks'></div>
-// //           <div className='boks'></div>
-// //           <div className='boks'></div> */}
-// //         </div>
-// //       </div>
-// //     )
-// //   }
-// // }
+    return(
+      <div className='container'>
+        <div className='col-6'>
+          {/* <Carousel/> */}
+        <h1>test page</h1>
+        <Disqus.DiscussionEmbed
+          shortname={disqusShortname}
+          config={discusConfig}
+          />
+          {/* <div className='boks'></div>
+          <div className='boks' style={{borderRadius:'18px'}}></div>
+          <div className='boks'></div>
+          <div className='boks'></div>
+          <div className='boks'></div>
+          <div className='boks'></div>
+          <div className='boks'></div> */}
+        </div>
+      </div>
+    )
+  }
+}
 
-// // export default test;
+export default test;
 
 
 

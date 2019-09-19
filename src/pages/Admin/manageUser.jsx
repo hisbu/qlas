@@ -9,6 +9,8 @@ import Axios from 'axios'
 import { Spinner} from 'reactstrap'
 import {API_URL} from '../../helpers'
 import LoadingPage from '../loadingPage'
+import Moment from 'react-moment'
+
 const numeral = require('numeral')
 
 const useStyles = makeStyles(theme => ({
@@ -85,12 +87,13 @@ class ManageUsers extends Component{
                     <TableRow >
                         <TableCell>{i+1}</TableCell>
                         <TableCell>{val.username}</TableCell>
-                        <TableCell>{val.firstName}</TableCell>
-                        <TableCell>{val.lastName}</TableCell>
-                        <TableCell>{val.gender}</TableCell>
-                        <TableCell>{val.email}</TableCell>
+                        <TableCell>{val.durasi ? val.durasi : '-'}</TableCell>
+                        <TableCell>{val.akhirlangganan ? val.akhirlangganan : '-'}</TableCell>
+                        <TableCell>
+                        <Moment fromNow>{val.akhirlangganan}</Moment></TableCell>
+                        {/* <TableCell>{val.email}</TableCell>
                         <TableCell>{val.phone}</TableCell>
-                        <TableCell>{val.role}</TableCell>
+                        <TableCell>{val.role}</TableCell> */}
                         <TableCell>
                             <Edit style={{pointerEvents:'cursor'}}  onClick={()=> this.setState({openEdit:true, editData: val})}/>
                         </TableCell>
@@ -161,12 +164,12 @@ class ManageUsers extends Component{
                                 <TableRow>
                                     <TableCell style={{width:'10%'}}>No</TableCell>
                                     <TableCell>Username</TableCell>
-                                    <TableCell>First Name</TableCell>
-                                    <TableCell>Last Name</TableCell>
-                                    <TableCell>Gender</TableCell>
-                                    <TableCell>Email</TableCell>
+                                    <TableCell>Paket</TableCell>
+                                    <TableCell>Akhir langganan</TableCell>
+                                    <TableCell>sisa waktu</TableCell>
+                                    {/* <TableCell>Email</TableCell>
                                     <TableCell>Phone</TableCell>
-                                    <TableCell>Role</TableCell>
+                                    <TableCell>Role</TableCell> */}
                                     <TableCell colSpan='2'>Action</TableCell>
                                 </TableRow>
                             </TableHead>

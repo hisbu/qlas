@@ -75,7 +75,7 @@ class DashboardUser extends Component{
       )
     }
     else if(!this.props.authChecked && this.props.token === '') {
-        return <Redirect to="/" />
+        return <LoadingPage/>
     }
     return <LoadingPage/>
   }

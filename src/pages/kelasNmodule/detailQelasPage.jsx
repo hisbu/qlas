@@ -192,20 +192,20 @@ class DetailQelas extends Component{
                                 Materi
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            {/* <NavItem>
                                 <NavLink
                                 className={classnames({ active: this.state.activeTab === '3' })}
                                 onClick={() => { this.toggle('3'); }} >
                                 Quiz
                                 </NavLink>
-                            </NavItem>
-                            <NavItem>
+                            </NavItem> */}
+                            {/* <NavItem>
                                 <NavLink
                                 className={classnames({ active: this.state.activeTab === '4' })}
                                 onClick={() => { this.toggle('4'); }} >
                                 Konsultasi
                                 </NavLink>
-                            </NavItem>
+                            </NavItem> */}
                             </Nav>
                             {/* ================== tabcontent ================== */}
                             <TabContent activeTab={this.state.activeTab}>

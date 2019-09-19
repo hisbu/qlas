@@ -7,6 +7,7 @@ import queryString from 'query-string'
 import Axios from 'axios'
 import { API_URL } from '../../helpers'
 import LoadingPage from '../loadingPage'
+import Disqus from 'disqus-react';
 
 class DetailModul extends Component{
     state={
@@ -94,6 +95,7 @@ class DetailModul extends Component{
                         <div className='contentxx' dangerouslySetInnerHTML={{ __html: this.state.modulData[0].content }} />
                         {/* <p>{val.content}</p> */}
                     </div>
+
                 </div>
             )
         }
@@ -110,12 +112,23 @@ class DetailModul extends Component{
                             <div className='contentxx' dangerouslySetInnerHTML={{ __html: val.content }} />
                             {/* <p>{val.content}</p> */}
                         </div>
+                        {/* <Disqus.DiscussionEmbed
+                        shortname={disqusShortname}
+                        config={discusConfig}
+                        /> */}
                     </div>
                 )
             }
         })
     }
     render(){
+        // {
+        //     const disqusShortname = "qelas"
+        //     const discusConfig = {
+        //       url : "http://localhost:3000",
+        //       identifier  : 'article_id',
+        //       title       : 'Title article'
+        //     }
         console.log(this.state.belajar)
         if(!this.state.modulData){
             return <LoadingPage/>
