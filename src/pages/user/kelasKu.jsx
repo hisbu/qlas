@@ -41,6 +41,9 @@ class Kelasku extends Component{
         let kelasKudata = this.props.kelaskuData
         let kelasdata = this.state.kelasData
         let modulSelesai = this.props.modulSelesai
+        if(kelasKudata.length === 0){
+            return <center>belum ada kelas yang kamu ambil</center>
+        }
         return kelasKudata.map((val)=>{
             return kelasdata.map((item) => {
                 if(item.idKelas === val.kelasId){

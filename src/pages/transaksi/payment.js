@@ -72,9 +72,7 @@ class Payment extends Component{
         // console.log(this.props.selectedPaket)
         // console.log(this.props.userId)
         // console.log(this.state.date)
-        if(this.state.selesai){
-            return (<Redirect to='/dashboard'/>)
-        }
+        
         
     }
 
@@ -91,6 +89,10 @@ class Payment extends Component{
         else {
             this.setState({ addImageFileName: 'Select Image Kelas....', addImageFile: undefined })
         }
+    }
+
+    onClickSelesai=()=>{
+        this.setState({selesai: true, openTerima: false})
     }
 
     onBtnSaveClick=()=>{
@@ -133,7 +135,7 @@ class Payment extends Component{
             console.log(formData)
             Axios.post(API_URL + '/konfirmasi/addKonfirmasi', formData, headers)
             .then((res)=>{
-                this.setState({kelasData: res.data, open: false, loading: false, openTerima: true, selesai: true})
+                this.setState({kelasData: res.data, open: false, loading: false, openTerima: true})
                 console.log(this.state.kelasName)
                 
             }).catch((err)=>{
@@ -164,6 +166,9 @@ class Payment extends Component{
         if(!this.state.transData){
             return <LoadingPage/>
         }
+        if(this.state.selesai){
+            return (<Redirect to='/dashboard'/>)
+        }
         console.log(this.state.selectedDate)
         console.log(this.props.transaksi)
         // const {textField, menu} = useStyles
@@ -181,7 +186,7 @@ class Payment extends Component{
                                 <h4>Paket Qelas {this.state.transData.durasi} hari</h4>
                                 <h1>Rp. {numeral(this.state.transData.harga).format('0,0')}</h1>
                             </div>
-                            <p><i>*Tiga digit angka paling akhir, merupakan kode unik untuk transaksi anda, <br/> monhon untuk melakukan pembayaran sesuai nilai tagihan yang tertera. </i></p>
+                            <p><i>monhon untuk melakukan pembayaran sesuai nilai tagihan yang tertera. </i></p>
                         </div>
                         <div className='bankContainer '>
                             <div className='row d-flex justify-content-center'>
@@ -261,7 +266,7 @@ class Payment extends Component{
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={this.onClickSelesai} color="primary">
                         Close
                     </Button>
                     </DialogActions>

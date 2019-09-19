@@ -2,13 +2,32 @@ import React, {Component} from 'react'
 import { 
     Table, TableBody, TableCell, TableHead, TableRow,
     Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide,
-     DialogContentText
+     DialogContentText, TextField, Menu, makeStyles, MenuItem
     } from '@material-ui/core'
-import { Close, Check} from '@material-ui/icons'
+import { Edit, Check} from '@material-ui/icons'
 import Axios from 'axios'
+import { Spinner} from 'reactstrap'
 import {API_URL} from '../../helpers'
 import LoadingPage from '../loadingPage'
 const numeral = require('numeral')
+
+const useStyles = makeStyles(theme => ({
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
+    dense: {
+        marginTop: 19,
+    },
+    menu: {
+        width: 200,
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
+}));
 
 const TransitionTerima = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -17,6 +36,11 @@ const TransitionTerima = React.forwardRef(function Transition(props, ref) {
 class ManageUsers extends Component{
     state={
         userData:'',
+        editData:'',
+        openEdit:false,
+        role: '',
+        roledata:'',
+        loading: false
         // selectedKonfirmasi:'',
         // openTerima          : false,
     }
@@ -35,6 +59,14 @@ class ManageUsers extends Component{
         }).catch((err)=>{
             console.log(err)
         })
+
+        Axios.get(`${API_URL}/role/getRoles`)
+        .then((res)=>{
+            console.log(res.data)
+            this.setState({roledata: res.data})
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 
     handleClickOpenTerima = () =>{
@@ -43,7 +75,7 @@ class ManageUsers extends Component{
 
 
     handleClose = () =>{
-        this.setState({ openTerima: false})
+        this.setState({ openEdit: false})
     }
     renderData=()=>{
         console.log(this.state.userData)
@@ -60,34 +92,67 @@ class ManageUsers extends Component{
                         <TableCell>{val.phone}</TableCell>
                         <TableCell>{val.role}</TableCell>
                         <TableCell>
-                            <Check style={{pointerEvents:'cursor'}}  onClick={()=> this.onBtnKonfirmasiClick(val.idtransaction)}/>
+                            <Edit style={{pointerEvents:'cursor'}}  onClick={()=> this.setState({openEdit:true, editData: val})}/>
                         </TableCell>
                     </TableRow>
                 )
             });
     }
 
+    renderRole = () =>{
+        var role = this.state.roledata
+        return role.map((val) =>{
+            return (
+                <MenuItem key={val.roleName} value={val.id}>{val.roleName}</MenuItem>
+            )
+        })
+    }
+
+    onBtnUpdateClick=()=>{
+        this.setState({loading: true})
+        console.log('=============', this.state.editData.id)
+        var roleId = this.state.role ? this.state.role : this.state.editData.id
+       console.log('role id ------------- ',roleId)
+        const token = localStorage.getItem('token')
+        var headers = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        
+        var data = {
+            roleId
+        }
+        console.log(data)
+
+
+            Axios.put(API_URL + '/user/editRole?id='+this.state.editData.id, data, headers)
+            .then((res)=>{
+                this.setState({userData: res.data, openEdit: false, loading: false})
+                console.log(this.state.kelasName)
+            }).catch((err)=>{
+                console.log(err)
+            })
+
+    }
+
     onBtnKonfirmasiClick=(id)=>{
         const token     = localStorage.getItem('token')
         console.log(token)
-            // var headers = {
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // }
-        // Axios.put(`${API_URL}/transaction/konfirmasi/${id}`)
-        // .then((res)=>{
-        //     console.log(res.data)
-        //     this.setState({userData: res.data, openTerima: true})
-        // }).catch((err)=>{
-        //     console.log(err)
-        // })
 
     }
+
+    handleChange = name => event => {
+        console.log(event.target.value)
+        this.setState({role: event.target.value})
+    // setValues({ ...values, [name]: event.target.value });
+    };
     render(){
+        const {textField, menu, formControl} = useStyles
         if(!this.state.userData){
             return <LoadingPage/>
         }
+        if(!this.state.roledata) return <LoadingPage/>
         return (
             <div className='container mt-4 mb-4'>
                 <div className='dataContainer row'>
@@ -112,7 +177,7 @@ class ManageUsers extends Component{
                     </div>
 
                     <Dialog
-                        open={this.state.openTerima}
+                        open={this.state.openEdit}
                         TransitionComponent={TransitionTerima}
                         keepMounted
                         onClose={this.handleClose}
@@ -121,13 +186,27 @@ class ManageUsers extends Component{
                     >
                         <DialogTitle id="alert-dialog-slide-title">{"Terima Kasih"}</DialogTitle>
                         <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            Pemnayaran telah berhasil dikonfirmasi
-                        </DialogContentText>
+                        <TextField
+                            id="role"
+                            select
+                            label="Edit Role"
+                            className={textField}
+                            value={this.state.role ? this.state.role : this.state.editData.roleId}
+                            onChange={this.handleChange()}
+                            SelectProps={{
+                                MenuProps: {
+                                    className: menu,
+                                },
+                            }}
+                            margin="normal"
+                            fullWidth
+                        >
+                            {this.renderRole()}
+                        </TextField>
                         </DialogContent>
                         <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Close
+                        <Button onClick={this.onBtnUpdateClick} color="primary">
+                            {this.state.loading ? <Spinner color="warning"/> : 'Update'}
                         </Button>
                         </DialogActions>
                     </Dialog>

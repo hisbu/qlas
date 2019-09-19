@@ -64,9 +64,9 @@ class ManageKonfirmasi extends Component{
                         <TableCell>
                             <Check style={{pointerEvents:'cursor'}}  onClick={()=> this.onBtnKonfirmasiClick(val.idkonfirmasi)}/>
                         </TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                             <Close onClick={()=> this.onBtnDeleteKelasClick(val.idKelas)}/>
-                        </TableCell>
+                        </TableCell> */}
                     </TableRow>
                 )
             }

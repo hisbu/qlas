@@ -28,6 +28,10 @@ const useStyles = makeStyles(theme => ({
     menu: {
         width: 200,
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+      },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -51,7 +55,8 @@ class ManageModul extends Component{
         content             : '',
         selectedEditModulId : 0,
         deleteId            : 0,
-        loading             : false
+        loading             : false,
+        filter              : 0
     }
 
     componentDidMount(){
@@ -91,7 +96,23 @@ class ManageModul extends Component{
         console.log(this.state.modulData)
         var modulData = this.state.modulData
         return modulData.map((val, i) => {
-            if(val.idmodul !== this.selectedEditModulId){
+            if(this.state.filter === 0){
+                return(
+                    <TableRow >
+                        <TableCell>{i+1}</TableCell>
+                        <TableCell><Link to={`/detail?id=${val.idmodul}`}>{val.nama}</Link></TableCell>
+                        <TableCell>{val.title}</TableCell>
+                        <TableCell className='fontCell'><div dangerouslySetInnerHTML={{ __html:val.content? val.content.split(' ').splice(0,8).join(' '): null}}/></TableCell>
+                        <TableCell>{val.video}</TableCell>
+                        <TableCell>
+                            <EditOutlined style={{pointerEvents:'cursor'}}  onClick={()=> this.setState({selectedEditModulId: val.idmodul, openEdit:true, editData: val})}/>
+                        </TableCell>
+                        <TableCell>
+                            <DeleteOutline onClick={()=>this.setState({openTerima: true, deleteId: val.idmodul})}/>
+                        </TableCell>
+                    </TableRow>
+                )
+            }else if(val.idkelas === this.state.filter){
                 return(
                     <TableRow >
                         <TableCell>{i+1}</TableCell>
@@ -108,7 +129,8 @@ class ManageModul extends Component{
                     </TableRow>
                 )
             }
-            return <nbsp/>
+            
+            // return <nbsp/>
         });
     }
 
@@ -141,6 +163,12 @@ class ManageModul extends Component{
     handleChange = name => event => {
         console.log(event.target.value)
         this.setState({kelas: event.target.value})
+    // setValues({ ...values, [name]: event.target.value });
+    };
+
+    handleChangefilter = name => event => {
+        console.log(event.target.value)
+        this.setState({filter: event.target.value})
     // setValues({ ...values, [name]: event.target.value });
     };
 
@@ -254,7 +282,7 @@ class ManageModul extends Component{
     render(){
         console.log(this.state.modulData)
         console.log(this.state.kelasData)
-        const {textField, menu} = useStyles
+        const {textField, menu, formControl} = useStyles
         if(!this.state.modulData){
             return <LoadingPage/>
         }
@@ -316,6 +344,24 @@ class ManageModul extends Component{
 
                 {/* ============== TABLE DATA KELAS ============== */}
                 <div className='dataContainer row'>
+                <TextField
+                            id="kelas"
+                            select
+                            label="Filter by Kelas name; "
+                            className={textField, formControl}
+                            value={this.state.kelas}
+                            onChange={this.handleChangefilter()}
+                            SelectProps={{
+                                MenuProps: {
+                                    className: menu,
+                                },
+                            }}
+                            margin="normal"
+                            fullWidth
+                        >
+                            {/* Render dropwodn menu */}
+                            {this.renderKelas()} 
+                        </TextField>
                     <Table>
                         <TableHead>
                             <TableRow>

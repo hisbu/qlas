@@ -42,6 +42,7 @@ class DashboardUser extends Component{
                   <Link to='/dashboard/kelasku'><span>Kelas Ku</span></Link>
                   { this.props.roleId != 3 ?
                   <section>
+                  {/* {document.getElementsByClassName('sideMenu').style.backgroundColor='red'} */}
                     <Link to='/dashboard/manageKelas'><span>Manage Kelas</span></Link>
                     <Link to='/dashboard/manageModul'><span>Manage Modul</span></Link>
                     <Link to='/dashboard/manageTransaksi'><span>Manage Transaksi</span></Link>

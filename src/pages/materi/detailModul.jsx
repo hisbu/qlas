@@ -34,19 +34,21 @@ class DetailModul extends Component{
         let data = this.state.modulData
         let belajar = this.state.belajar ? this.state.belajar : this.props.belajar
         return data.map((val)=>{
-            let status = ''
-            belajar.map((item) =>{
-                if(val.idmodul === item.modulId){
-                    return status = 'taken'
-                }
-            })
-            if(status){
-                return(
-                    <li onClick={()=> this.setState({selectedModul: val.idmodul})} style={{color: '#3f51b5', fontWeight:'bold'}}>
-                        <CheckCircleOutline color='primary'/> {val.title}
-                    </li>
-                )    
-            }
+            var status = ''
+            // belajar.map((item) =>{
+            //     if(val.idmodul === item.modulId){
+            //         console.log('masuk taken')
+            //         return status = 'taken'
+            //     }
+            // })
+            // console.log(status)
+            // if(status){
+            //     return(
+            //         <li onClick={()=> this.setState({selectedModul: val.idmodul})} style={{color: '#3f51b5', fontWeight:'bold'}}>
+            //             <CheckCircleOutline color='primary'/> {val.title}
+            //         </li>
+            //     )    
+            // }
             return(
                 <li onClick={()=>this.lanjutBtnClick(val.idmodul)}>{val.title}</li>
             )
@@ -71,6 +73,7 @@ class DetailModul extends Component{
             Axios.get(`${API_URL}/belajar/getBelajar?iduser=${this.props.userId}`)
             .then((res)=>{
                 this.setState({belajar: res.data})
+                console.log(this.state.belajar)
             }).catch((err)=>{
                 console.log(err)
             })
@@ -113,6 +116,7 @@ class DetailModul extends Component{
         })
     }
     render(){
+        console.log(this.state.belajar)
         if(!this.state.modulData){
             return <LoadingPage/>
         }
