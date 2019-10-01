@@ -33,6 +33,10 @@ import HomeAdmin from './pages/Admin/dashboardAdmin'
 import Kelasku from './pages/user/kelasKu'
 import ManageTransaksi from './pages/Admin/manageTransaksi'
 import ManageUser from './pages/Admin/manageUser'
+import Finish from './finish'
+import Unfinish from './unfinish'
+import Error_page from './error'
+
 class App extends Component{
   state = {
       kelasData:''
@@ -97,6 +101,9 @@ class App extends Component{
           <Route path='/dashboard/detaiilModul' component={DetailModul}/>
           <Route path='/dashboard/manageTransaksi' component={ManageTransaksi}/>
           <Route path='/dashboard/manageUser' component={ManageUser}/>
+          <Route path='/finish' component={Finish}/>
+          <Route path='/unfinish' component={Unfinish}/>
+          <Route path='/error_page' component={Error_page}/>
           <Route path='*' component={NotFound}/>
         </Switch>
         <Footer/>
