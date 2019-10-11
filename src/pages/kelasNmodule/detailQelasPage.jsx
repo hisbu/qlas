@@ -222,7 +222,7 @@ class DetailQelas extends Component{
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
-                                <MateriPage idKelas={this.state.kelasDetail.idKelas}/>
+                                <MateriPage idKelas={this.state.kelasDetail.idKelas} location={this.props.location}/>
                             </TabPane>
                             <TabPane tabId="3">
                                 <h2>tab 3</h2>

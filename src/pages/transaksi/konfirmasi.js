@@ -63,7 +63,7 @@ class confirmation extends Component{
                 console.log(err)
             })
         }else{
-            alert('something wrong')
+            console.log('something wrong')
         }
     }
    

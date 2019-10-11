@@ -20,14 +20,14 @@ class MateriPage extends Component{
         window.scrollTo(0,0)
         var position = window.location.href.split('/')[3]
         this.props.pagePosition(position)
-
-        let url = queryString.parse(this.props)
+        console.log()
+        let url = queryString.parse(this.props.location.search)
         // let link = queryString.parse(this.props)
-        // console.log(url)
+        console.log(url)
         // console.log(this.props.userId)
-        Axios.get(`${API_URL}/modul/getModul?idkelas=${this.props.idKelas}`)
+        Axios.get(`${API_URL}/modul/getModul?idkelas=${url.id}`)
         .then((res)=>{
-            // console.log(res.data)
+            console.log(res.data)
             this.setState({modulKelasData: res.data})
         }).catch((err)=>{
             console.log(err)
@@ -55,24 +55,26 @@ class MateriPage extends Component{
         var data = this.state.modulKelasData
         var dataModul = this.props.belajar
         return data.map((val, i)=>{
-            let status = ''
-            dataModul.map((item)=>{
-                if(val.idmodul === item.modulId){
-                    return status = 'taken'
-                }   
-            })
-            if(status){
-                return(
-                    <TableRow className='modulList'>
-                        <TableCell>{val.title}</TableCell>
-                        <TableCell >
-                            <Link to={`/dashboard/detailModul?kelasId=${val.idkelas}&idmodul=${val.idmodul}`} style={{textDecoration:'none', color: '#000'}}>
-                                <p className='lanjut' style={{color: '#3f51b5', fontWeight:'bold'}}><CheckCircleOutline color='primary'/>Selesai</p>
-                            </Link>
-                        </TableCell>
-                    </TableRow>
-                )    
-            }
+            // let status = ''
+            // if(dataModul){
+            //     dataModul.map((item)=>{
+            //         if(val.idmodul === item.modulId){
+            //             return status = 'taken'
+            //         }   
+            //     })
+            // }
+            // if(status){
+                // return(
+                //     <TableRow className='modulList'>
+                //         <TableCell>{val.title}</TableCell>
+                //         <TableCell >
+                //             <Link to={`/dashboard/detailModul?kelasId=${val.idkelas}&idmodul=${val.idmodul}`} style={{textDecoration:'none', color: '#000'}}>
+                //                 <p className='lanjut' style={{color: '#3f51b5', fontWeight:'bold'}}><CheckCircleOutline color='primary'/>Selesai</p>
+                //             </Link>
+                //         </TableCell>
+                //     </TableRow>
+                // )    
+            // }
             return(
                 <TableRow className='modulList'>
                     <TableCell>{val.title}</TableCell>
@@ -81,7 +83,9 @@ class MateriPage extends Component{
                         <Link to={`/dashboard/detailModul?kelasId=${val.idkelas}&idmodul=${val.idmodul}`} style={{textDecoration:'none', color: '#000'}}>
                             <p className='lanjut' onClick={()=>this.lanjutBtnClick(val.idmodul)}>Lanjut belajar</p>
                         </Link>
-                        : <p className='lanjut'>Lanjut belajar</p> }
+                        : <Link to={`/login`}>
+                            <p className='lanjut'>Lanjut belajar</p> </Link>
+                        }
                     </TableCell>
                 </TableRow>
             )
@@ -112,9 +116,9 @@ class MateriPage extends Component{
         if(!this.state.modulKelasData){
             return <LoadingPage/>
         }
-        if(!this.props.belajar){
-            return <LoadingPage/>
-        }
+        // if(!this.props.belajar){
+        //     return <LoadingPage/>
+        // }
         // if(!this.props.kelasId){
         //     return <LoadingPage/>
         // }

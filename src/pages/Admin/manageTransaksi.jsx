@@ -5,6 +5,8 @@ import {
      DialogContentText
     } from '@material-ui/core'
 import { Close, Check} from '@material-ui/icons'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Axios from 'axios'
 import {API_URL} from '../../helpers'
 import LoadingPage from '../loadingPage'
@@ -87,6 +89,9 @@ class ManageTransaksi extends Component{
         if(!this.state.transaksiData){
             return <LoadingPage/>
         }
+        if(this.props.roleId === 3){
+            return <Redirect to = '/'/>
+        }
         return (
             <div className='container mt-4 mb-4'>
                 <div className='dataContainer row'>
@@ -134,4 +139,10 @@ class ManageTransaksi extends Component{
     }
 }
 
-export default ManageTransaksi;
+const mapStateToProps = (state)=>{
+    return {
+        roleId      : state.auth.roleId
+    }
+  }
+
+export default connect(mapStateToProps) (ManageTransaksi);

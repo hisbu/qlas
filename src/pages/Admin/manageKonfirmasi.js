@@ -5,6 +5,8 @@ import {
      DialogContentText
     } from '@material-ui/core'
 import { Close, Check} from '@material-ui/icons'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Axios from 'axios'
 import {API_URL} from '../../helpers'
 import LoadingPage from '../loadingPage'
@@ -95,6 +97,9 @@ class ManageKonfirmasi extends Component{
         if(!this.state.konfirmasiData){
             return <LoadingPage/>
         }
+        if(this.props.roleId !== 3){
+            return <Redirect to='/'/>
+        }
         return (
             <div className='container mt-4 mb-4'>
                 <div className='dataContainer row'>
@@ -144,4 +149,10 @@ class ManageKonfirmasi extends Component{
     }
 }
 
-export default ManageKonfirmasi;
+const mapStateToProps = (state)=>{
+    return {
+        roleId      : state.auth.roleId
+    }
+  }
+
+export default connect(mapStateToProps) (ManageKonfirmasi);

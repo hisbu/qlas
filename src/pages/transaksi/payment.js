@@ -162,6 +162,35 @@ class Payment extends Component{
         this.setState({bank: event.target.value})
     }
 
+    onKlickPay=()=>{
+        var invoice = this.state.transData.invoice
+        var nominal = this.state.transData.harga
+
+        var parameter = {
+            order_id : invoice,
+            gross_amount: nominal
+          }
+
+        Axios.post(`${API_URL}/midtrans/midtrans`, parameter)
+        .then((res)=>{
+            window.snap.pay(res.data, {
+                onSuccess: function(result){
+                 console.log('success')
+                 console.log(result)
+                 this.setstate({data: result})
+                },
+                onPending: function(result){
+                  console.log('success')
+                  console.log(result)
+                 },
+                 onError: function(result){
+                  console.log('success')
+                  console.log(result)
+                 }
+              })
+        })
+    }
+
     render(){
         if(!this.state.transData){
             return <LoadingPage/>
@@ -203,8 +232,8 @@ class Payment extends Component{
                             </div>
                         </div>
                         {/* <Link to='' style={{textDecoration:'none'}}> */}
-                            <div className='konfirmasi' onClick={this.handleClickOpen}>
-                                Konfirmasi Pembayaran
+                            <div className='konfirmasi' onClick={this.onKlickPay}>
+                                Bayar
                             </div>
                         {/* </Link> */}
                     </div>

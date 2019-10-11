@@ -36,6 +36,7 @@ import ManageUser from './pages/Admin/manageUser'
 import Finish from './finish'
 import Unfinish from './unfinish'
 import Error_page from './error'
+import Test from './test'
 
 class App extends Component{
   state = {
@@ -49,25 +50,25 @@ class App extends Component{
     // let params = queryString.parse(url);
     // console.log(id)
     // console.log(params)
-    console.log(this.props.username)
-    console.log(this.props.userId)
+    // console.log(this.props.username)
+    // console.log(this.props.userId)
     this.props.paketInit()
 
     Axios.get(`${API_URL}/kelas/getKelas`)
         .then((res)=>{
-            console.log(res.data)
-            console.log(res.data[0].kelasName)
+            // console.log(res.data)
+            // console.log(res.data[0].kelasName)
             // this.setState({kelasData: res.data})
-            this.props.kelasInit(res.data)
+            // this.props.kelasInit(res.data)
         }).catch((err)=>{
             console.log(err)
         })
   }
 
   componentDidUpdate(){
-    console.log(this.state.kelasData)
-    console.log(this.props.username)
-    console.log(this.props.userId)
+    // console.log(this.state.kelasData)
+    // console.log(this.props.username)
+    // console.log(this.props.userId)
     // this.props.kelasInit(this.state.kelasData)
   }
   render(){
@@ -104,7 +105,9 @@ class App extends Component{
           <Route path='/finish' component={Finish}/>
           <Route path='/unfinish' component={Unfinish}/>
           <Route path='/error_page' component={Error_page}/>
-          <Route path='*' component={NotFound}/>
+          <Route path='/test' component={Test}/>
+          {/* <Route path='*' component={NotFound}/> */}
+          
         </Switch>
         <Footer/>
       </div>

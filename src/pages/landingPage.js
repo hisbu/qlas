@@ -106,8 +106,7 @@ class LandingPage extends Component{
                                            <div className='feature_content text-center'>
                                                 <img src={Listening} height='100px' alt='listening'/>
                                                 <h3>Akses dimana saja</h3>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                                <p>Dapatkan kemudahan belajar dimana saja dengan platform qelas. kini mendapatkan ilmu menjadi lebih mudah</p>
                                            </div>
                                        </div>
                                    </div>
@@ -118,8 +117,7 @@ class LandingPage extends Component{
                                            <div className='feature_content text-center'>
                                                 <img src={Exam} height='100px' alt='exam'/>
                                                 <h3>Tingkatkan Kemampuan</h3>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                                <p>tingkatkan kemampuanmu dalam berbagai bidang, qelas menyediakan berbagai macam materi yang sayang anda butuhkan untuk upgrade skill anda</p>
                                            </div>
                                        </div>
                                    </div>
@@ -130,8 +128,7 @@ class LandingPage extends Component{
                                            <div className='feature_content text-center'>
                                                 <img src={Question} height='100px' alt='question'/>
                                                 <h3>Konsultasi dengan ahli</h3>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                                <p>belajar menjadi lebih mudah, karena dukungan para ahli dibidangnya. kami menjadin semua kendala anda dalam qelas ini dapat terpecahkan dari dukungan para ahli</p>
                                            </div>
                                        </div>
                                    </div>

@@ -1,41 +1,66 @@
-const midtransClient = require('./helpers/midtrans');
-// const midtransClient = require('midtrans-client'); // use this if installed via NPM
+// import React, {Component} from 'react'
+// import Axios from 'axios'
+// import { Button } from '@material-ui/core'
+// import { API_URL } from './helpers'
+// // import {snap} from 'midtrans'
 
-// initialize snap client object
-let snap = new midtransClient.Snap({
-    isProduction : false,
-    serverKey : 'SB-Mid-server-Dr8HK_lJ4cuEZi4rUgNcsDUR',
-    clientKey : 'SB-Mid-client-Ttge99xVU4AOz44T'
-});
+// class Test extends Component{
+    
+//     componentDidMount(){
+//         // const data = {
+//         //     transaction_details: {
+//         //     order_id: "ORDER-101",
+//         //     gross_amount: 10000
+//         //   }
+//         // }
+    
+//         // const headers = {
+//         //   'Accept' :'*',
+//         //   'Content-Type': 'application/json',
+//         //   'Authorization': 'Basic AUTH_STRING',
+//         //   'Access-Control-Allow-Origin': '*',
+//         //   'Access-Control-Allow-Methods': 'POST',
+//         //   'Access-Control-Allow-Headers': 'Authorization'
+//         // }
+    
+//         // Axios.post('https://app.sandbox.midtrans.com/snap/v1/transactions', data ,{
+//         //   headers:{
+//         //     'Accept' :'application/json',
+//         //     'Content-Type': 'application/json',
+//         //     'Authorization': 'Basic AUTH_STRING',
+//         //     'Access-Control-Allow-Origin': '*',
+//         //     'Access-Control-Allow-Methods': 'POST',
+//         //     'Access-Control-Allow-Headers': 'Authorization'
+//         //   } , 
+//         //   // auth:{
+//         //   //   username: 'SB-Mid-server-Dr8HK_lJ4cuEZi4rUgNcsDUR',
+//         //   //   password: ''
+//         //   // }
+//         // } )
+//         // .then((res)=>{
+//         //   console.log(res.data)
+//         // }).catch((err)=>{
+//         //   console.log(err)
+//         // })
+//     }
 
-// prepare Snap API parameter ( refer to: https://snap-docs.midtrans.com ) minimum parameter example:
-let parameter = {
-    "transaction_details": {
-        "order_id": "test-transaction-123",
-        "gross_amount": 200000
-    }, "credit_card":{
-        "secure" : true
-    }
-};
-
-// create transaction
-snap.createTransaction(parameter)
-    .then((transaction)=>{
-        // transaction token
-        let transactionToken = transaction.token;
-        console.log('transactionToken:',transactionToken);
-
-        // transaction redirect url
-        let transactionRedirectUrl = transaction.redirect_url;
-        console.log('transactionRedirectUrl:',transactionRedirectUrl);
-    })
-    .catch((e)=>{
-        console.log('Error occured:',e.message);
-    });
-
-// transaction is object representation of API JSON response
-// sample:
-// {
-// 'redirect_url': 'https://app.sandbox.midtrans.com/snap/v2/vtweb/f0a2cbe7-dfb7-4114-88b9-1ecd89e90121', 
-// 'token': 'f0a2cbe7-dfb7-4114-88b9-1ecd89e90121'
+//     klikPay=()=>{
+//         Axios.get(API_URL+'/midtrans/midtrans')
+//         .then((res)=>{
+//             console.log(res.data)
+//             snap.pay(res.data)
+//         }).catch((err)=>{
+//             console.log(err)
+//         })
+//     }
+//     render(){
+//         return(
+//             <center>
+//                 <h1>test</h1>
+//                 <Button onClick={this.klikPay}>Pay</Button>
+//             </center>
+//         )
+//     }
 // }
+
+// export default Test;
