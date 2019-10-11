@@ -61,6 +61,7 @@ class Example extends React.Component {
     const {bigAvatar} = useStyle
     console.log(this.props.history.location.pathname)
     if(this.props.history.location.pathname ==='/'){
+      console.log('====transaprant=====')
         return (
           <div className='Navbar landingPage'>
             <Navbar light expand="md" className='Navbar'>
