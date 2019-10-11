@@ -16,7 +16,8 @@ import { makeStyles, Avatar } from '@material-ui/core'
   import Logo from './../supports/img/logo3.png'
   import Logo2 from './../supports/img/logo1.png'
   import qian from '../supports/img/qian.jpg'
-  import { Link } from 'react-router-dom'
+  
+  import { Link, withRouter } from 'react-router-dom'
   import {BtnBgWhite} from './../component/btnQlas'
   import { connect } from 'react-redux'
   import TopMenu from './topMenu'
@@ -58,7 +59,8 @@ class Example extends React.Component {
   render() {
     console.log('posisition page ===========>',this.props.position)
     const {bigAvatar} = useStyle
-    if(this.props.position==='landing'){
+    console.log(this.props.history.location.pathname)
+    if(this.props.history.location.pathname ==='/'){
         return (
           <div className='Navbar landingPage'>
             <Navbar light expand="md" className='Navbar'>
@@ -121,7 +123,7 @@ class Example extends React.Component {
           </div>
         );
     }
-    if(this.props.position==='dashboard'){
+    if(this.props.history.location.pathname ==='/dashboard'){
       return (
         <TopMenu/>
         
@@ -200,4 +202,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {onUserLogout}) (Example);
+export default withRouter(connect(mapStateToProps, {onUserLogout}) (Example));
