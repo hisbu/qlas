@@ -132,7 +132,7 @@ class Example extends React.Component {
   }
     return (
       <div className='Navbar2 detailPage'>
-        <Navbar light expand="md" className='Navbar'>
+        <Navbar light expand="md" className='Navbar2'>
             <div className="container">
             <NavbarBrand href="/">
                 <img src={Logo2} height='30px' alt='qlas logo' />
