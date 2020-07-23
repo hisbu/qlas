@@ -26,7 +26,7 @@ class LandingPage extends Component{
         this.props.pagePosition(this.state.location)
         console.log(this.props.pageLocation)
         console.log(this.state.location)
-
+        console.log(API_URL)
         Axios.get(`${API_URL}/kelas/getKelas`)
         .then((res)=>{
             console.log(res.data[0].kelasName)
