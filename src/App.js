@@ -72,6 +72,7 @@ class App extends Component{
     // this.props.kelasInit(this.state.kelasData)
   }
   render(){
+    console.log(process.env.REACT_APP_API_URL)
     return(
       <div>
         <NavBar/>
