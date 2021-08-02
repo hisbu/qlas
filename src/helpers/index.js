@@ -11,4 +11,4 @@ console.log(dbport)
 console.log(process.env)
 // export const API_URL = `http://${dbhost}:${dbport}`
 // export const API_URL = 'http://52.230.68.33:30012'
-export const API_URL = "http://service-backend:2017"
+export const API_URL = "http://34.101.155.242:30012"
